@@ -1,0 +1,14 @@
+[
+{
+  "modid": "twgcore",
+  "name": "\u00A76\u00A7lTimberwolf Galaxy Core Mod",
+  "description": "Core mod!",
+  "version": "1.0",
+  "mcversion": "",
+  "authorList": ["\n \u00A75SolarAlpha"],
+  "credits": "\n Project Founders: \n  \u00A73SolarAlpha \n  \u00A73MindMoon \n Staff: \n  \u00A7BIcyWaddle",
+  "logoFile": "animod.png",
+  "screenshots": [],
+  "dependencies": []
+}
+]

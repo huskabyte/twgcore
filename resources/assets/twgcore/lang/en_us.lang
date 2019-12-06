@@ -1,0 +1,26 @@
+itemGroup.twgblockstab=Blocks
+tile.ore_silver.name=Silver Ore
+tile.ore_carrack.name=Carrack Ore
+tile.ore_radian.name=Radian Ore
+tile.ore_arilium.name=Arilium Ore
+
+itemGroup.twgcurrencytab=Currency
+item.coin_carrack.name=Carrack
+item.coin_silver.name=Silver Coin
+item.coin_radian.name=Radian
+
+itemGroup.twgmaterialtab=Materials
+item.ingot_arilium.name=Arilium Ingot
+
+itemGroup.twgtoolstab=Tools
+item.axe_arilium.name=Arilium Axe
+item.hoe_arilium.name=Arilium Hoe
+item.pickaxe_arilium.name=Arilium Pickaxe
+item.shovel_arilium.name=Arilium Shovel
+
+itemGroup.twgcombattab=Combat
+item.helmet_arilium.name=Arilium Helmet
+item.chestplate_arilium.name=Arilium Chestplate
+item.leggings_arilium.name=Arilium Leggings
+item.boots_arilium.name=Arilium Boots
+item.sword_arilium.name=Arilium Sword

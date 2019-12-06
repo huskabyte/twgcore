@@ -1,0 +1,6 @@
+{
+    "parent": "block/cube_all",
+    "textures": {
+        "all": "twgcore:blocks/ore_silver"
+    }
+}

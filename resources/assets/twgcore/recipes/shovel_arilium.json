@@ -1,0 +1,22 @@
+{
+    "type": "minecraft:crafting_shaped",
+    
+    "pattern":
+    [
+        "A",
+        "R",
+        "R"
+    ],
+    
+    "key":
+    {
+        "A": {"item": "twgcore:ingot_arilium"},
+        "R": {"item": "minecraft:blaze_rod"}
+    },
+    
+    "result":
+    {
+        "item": "twgcore:shovel_arilium",
+        "count": 1
+    }
+}
