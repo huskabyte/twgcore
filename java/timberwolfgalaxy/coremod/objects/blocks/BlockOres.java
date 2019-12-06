@@ -3,7 +3,7 @@ package timberwolfgalaxy.coremod.objects.blocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
-import net.minecraft.item.Item;
+import net.minecraft.block.state.IBlockState;
 import timberwolfgalaxy.coremod.Main;
 import timberwolfgalaxy.coremod.init.BlockInit;
 import timberwolfgalaxy.coremod.init.ItemInit;
@@ -34,11 +34,26 @@ public class BlockOres extends Block implements IHasModel, IMetaName{
 		this.name = name;
 		this.dimension = dimension;
 	}
+	
+	@Override
+	public int damageDropped(IBlockState state) {
+		return ((EnumHandler.EnumType)state.getValue(VARIANT)).getMeta();
+	}
+	
+	@Override
+	public int getMetaFromState(IBlockState state) {
+		return ((EnumHandler.EnumType)state.getValue(VARIANT)).getMeta();
+	}
+	
+	@Override
+	public IBlockState getStateFromMeta(int meta) {
+		return this.getDefaultState().withProperty(VARIANT, EnumHandler.EnumType.byMetadata(meta));
+	}
 
 	@Override
 	public void registerModels() {
 		for(int i = 0; i < EnumHandler.EnumType.values().length; i++) {
-			Main.proxy.registerVariantRenderer(this, i, "ore_" + this.dimension + EnumHandler.EnumType.values()[i].getName(), "inventory");
+			Main.proxy.registerVariantRenderer(new ItemBlockVariants(this), i, "ore_" + this.dimension + "_" + EnumHandler.EnumType.values()[i].getName(), "inventory");
 		}
 	}
 
