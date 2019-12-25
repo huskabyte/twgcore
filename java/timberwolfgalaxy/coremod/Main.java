@@ -15,6 +15,7 @@ import timberwolfgalaxy.coremod.tabs.TWGCurrency;
 import timberwolfgalaxy.coremod.tabs.TWGMaterials;
 import timberwolfgalaxy.coremod.tabs.TWGTools;
 import timberwolfgalaxy.coremod.util.Reference;
+import timberwolfgalaxy.coremod.util.handlers.RegistryHandler;
 
 @Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION)
 public class Main {
@@ -30,10 +31,6 @@ public class Main {
 	@SidedProxy(clientSide = Reference.CLIENT, serverSide = Reference.COMMON)
 	public static CommonProxy proxy;
 	
-	@EventHandler
-	public static void preInit(FMLPreInitializationEvent event) {
-		
-	}
 	@EventHandler
 	public static void init(FMLInitializationEvent event) {
 		
