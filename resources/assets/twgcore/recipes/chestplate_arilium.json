@@ -3,14 +3,14 @@
     
     "pattern":
     [
-        "A A"
-        "AAA"
+        "A A",
         "AAA",
+        "AAA"
     ],
     
     "key":
     {
-        "A": {"item": "twgcore:ingot_arilium"},
+        "A": {"item": "twgcore:ingot_arilium"}
     },
     
     "result":

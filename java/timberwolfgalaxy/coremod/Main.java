@@ -32,6 +32,12 @@ public class Main {
 	public static CommonProxy proxy;
 	
 	@EventHandler
+	public static void preInit(FMLPreInitializationEvent event) {
+		RegistryHandler.preInitRegistries();
+		proxy.registerEntityRenders();
+	}
+	
+	@EventHandler
 	public static void init(FMLInitializationEvent event) {
 		
 	}

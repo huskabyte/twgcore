@@ -5,6 +5,7 @@ import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import timberwolfgalaxy.coremod.util.Reference;
+import timberwolfgalaxy.coremod.util.handlers.RenderHandler;
 
 public class ClientProxy extends CommonProxy{
 	
@@ -15,5 +16,10 @@ public class ClientProxy extends CommonProxy{
 	@Override
 	public void registerVariantRenderer(Item item, int meta, String filename, String id) {
 		ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(new ResourceLocation(Reference.MODID, filename), id));
+	}
+	
+	@Override
+	public void registerEntityRenders() {
+		RenderHandler.registerEntityRenders();
 	}
 }

@@ -6,9 +6,10 @@ import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import timberwolfgalaxy.coremod.init.BlockInit;
+import timberwolfgalaxy.coremod.init.EntityInit;
 import timberwolfgalaxy.coremod.init.ItemInit;
+import timberwolfgalaxy.coremod.proxy.ClientProxy;
 import timberwolfgalaxy.coremod.util.IHasModel;
 
 @EventBusSubscriber
@@ -35,6 +36,10 @@ public class RegistryHandler {
 				((IHasModel)block).registerModels();
 			}
 		}
+	}
+	
+	public static void preInitRegistries() {
+		EntityInit.registerEntities();
 	}
 	
 }
