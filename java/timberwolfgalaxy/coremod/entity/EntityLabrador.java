@@ -89,16 +89,9 @@ public class EntityLabrador extends EntityWolf {
 
 		if (this.isTamed()) {
 			if (this.isOwner(player)) {
-				Minecraft.getMinecraft().displayGuiScreen(new MyGui());
+				Minecraft.getMinecraft().displayGuiScreen(new MyGui(this));
 				if(!this.world.isRemote) {
-					this.aiDown.setDown(!this.isDown());
-					this.aiSit.setSitting(this.isDown());
-				
-					//player.sendMessage(new TextComponentString(this.isDown() + "\n"));;
-				
 					this.isJumping = false;
-					this.navigator.clearPath();
-					this.setAttackTarget((EntityLivingBase) null);
 				}
 				}
 			}
@@ -117,4 +110,11 @@ public class EntityLabrador extends EntityWolf {
 			this.dataManager.set(DOWN, Byte.valueOf((byte) (b0 & -3)));
 		}
 	}
+	
+	public void thisSetSitting(boolean sitting){
+		this.aiSit.setSitting(sitting);
+    }
+	public void thisSetDown(boolean down){
+		this.aiDown.setDown(down);
+    }
 }

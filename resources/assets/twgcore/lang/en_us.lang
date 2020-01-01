@@ -26,3 +26,9 @@ item.boots_arilium.name=Arilium Boots
 item.sword_arilium.name=Arilium Sword
 
 entity.labrador.name=Labrador
+
+menu.tricks=Animal Tricks
+
+tricks.sit=Sit
+tricks.down=Lie Down
+tricks.stand=Stand
