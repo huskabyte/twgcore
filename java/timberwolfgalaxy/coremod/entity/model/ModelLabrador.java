@@ -292,7 +292,7 @@ public class ModelLabrador extends ModelBase {
             this.Body.setRotationPoint(0.0F, 1.0F, 3.0F);
             this.BUTT.setRotationPoint(0.0F, 0.0F, 8.0F);
         }
-        else
+        else if(!thisEntity.isSitting())
         {
             this.Tail1.rotateAngleX = (float) (14.0F * Math.PI/180);
             this.Tail2.rotateAngleX = (float) (27.0F * Math.PI/180);
@@ -319,7 +319,10 @@ public class ModelLabrador extends ModelBase {
         
         //=============START SIT ANIMATION=============
         
-        if(thisEntity.isSitting()) {
+        /*if(thisEntity.isSitting() && !thisEntity.isDown()) {
+        	
+        	this.Pivot.setRotationPoint(0.0F, 12.0F, -9.0F);
+        	
         	this.Body.rotateAngleX = (float) (-37.0F * Math.PI/180);
         	this.BUTT.rotateAngleX = (float) (-47.0F * Math.PI/180);
         	
@@ -330,20 +333,152 @@ public class ModelLabrador extends ModelBase {
         	this.RBackLeg4_2.rotateAngleX = (float) (72.0F * Math.PI/180);
         	
         	this.Tail1.rotateAngleX = (float) (110.0F * Math.PI/180);
-        }
-        else {
+        }else if(!thisEntity.isDown()){
+        		
+        		this.Pivot.setRotationPoint(0.0F, 12.0F, -9.0F);
+            	
+            	this.Body.rotateAngleX = (float) (0.0F * Math.PI/180);
+            	this.BUTT.rotateAngleX = (float) (0.0F * Math.PI/180);
+            	
+            	this.RBackLeg1.rotateAngleX = (float) (-10.0F * Math.PI/180);
+            	this.RBackLeg4.rotateAngleX = (float) (-30.0F * Math.PI/180);
+            	
+            	
+            	this.LBackLeg1.rotateAngleX = (float) (-10.0F * Math.PI/180);
+        		this.RBackLeg4_2.rotateAngleX = (float) (-30.0F * Math.PI/180);
+        		
+            	this.Tail1.rotateAngleX = (float) (14.0F * Math.PI/180);
+        	}
+        
+        //==============END SIT ANIMATION==============
+        	
+        	if(thisEntity.isDown()) {
+        		this.Pivot.setRotationPoint(0.0F, 17.0F, -9.0F);
+        		
+        		this.Body.rotateAngleX = (float) (-6.67F * Math.PI/180);
+        		this.BUTT.rotateAngleX = (float) (-2.22F * Math.PI/180);
+        		
+        		this.RBackLeg1.rotateAngleX = (float) (-27.78F * Math.PI/180);
+        		this.RBackLeg2.rotateAngleX = (float) (-13.89F * Math.PI/180);
+        		this.RBackLeg3.rotateAngleX = (float) (-39.89F * Math.PI/180);
+        		this.RBackLeg4.rotateAngleX = (float) (-30F * Math.PI/180);
+        		this.RBackLeg4_1.rotateAngleX = (float) (21.67F * Math.PI/180);
+        		
+        		this.LBackLeg1.rotateAngleX = (float) (-27.78F * Math.PI/180);
+        		this.LBackLeg2.rotateAngleX = (float) (-13.89F * Math.PI/180);
+        		this.LBackLeg3.rotateAngleX = (float) (-39.89F * Math.PI/180);
+        		this.RBackLeg4_2.rotateAngleX = (float) (-30F * Math.PI/180);
+        		this.RBackLeg4_3.rotateAngleX = (float) (21.67F * Math.PI/180);
+        		
+        		this.Tail1.rotateAngleX = (float) (14.0F * Math.PI/180);
+        	}else if(!thisEntity.isSitting()){
+        		this.Pivot.setRotationPoint(0.0F, 12.0F, -9.0F);
+            	
+            	this.Body.rotateAngleX = (float) (0.0F * Math.PI/180);
+            	this.BUTT.rotateAngleX = (float) (0.0F * Math.PI/180);
+            	
+            	this.RBackLeg1.rotateAngleX = (float) (-10.0F * Math.PI/180);
+        		this.RBackLeg2.rotateAngleX = (float) (-10F * Math.PI/180);
+        		this.RBackLeg3.rotateAngleX = (float) (39F * Math.PI/180);
+            	this.RBackLeg4.rotateAngleX = (float) (-30.0F * Math.PI/180);
+            	this.RBackLeg4_1.rotateAngleX = (float) (10F * Math.PI/180);
+            	
+            	
+            	this.LBackLeg1.rotateAngleX = (float) (-10.0F * Math.PI/180);
+        		this.LBackLeg2.rotateAngleX = (float) (-10F * Math.PI/180);
+        		this.LBackLeg3.rotateAngleX = (float) (39F * Math.PI/180);
+        		this.RBackLeg4_2.rotateAngleX = (float) (-30.0F * Math.PI/180);
+        		this.RBackLeg4_3.rotateAngleX = (float) (10F * Math.PI/180);
+        		
+            	this.Tail1.rotateAngleX = (float) (14.0F * Math.PI/180);
+        	}*/
+        
+        if(thisEntity.isSitting()) {
+        	if(thisEntity.isDown()) {
+        		this.Pivot.setRotationPoint(0.0F, 17.0F, -9.0F);
+        		
+        		this.Body.rotateAngleX = (float) (-6.67F * Math.PI/180);
+        		this.BUTT.rotateAngleX = (float) (-2.22F * Math.PI/180);
+        		
+        		this.RBackLeg1.rotateAngleX = (float) (-27.78F * Math.PI/180);
+        		this.RBackLeg2.rotateAngleX = (float) (-13.89F * Math.PI/180);
+        		this.RBackLeg3.rotateAngleX = (float) (-80.89F * Math.PI/180);
+        		this.RBackLeg4.rotateAngleX = (float) (-30F * Math.PI/180);
+        		this.RBackLeg4_1.rotateAngleX = (float) (21.67F * Math.PI/180);
+        		
+        		this.LBackLeg1.rotateAngleX = (float) (-27.78F * Math.PI/180);
+        		this.LBackLeg2.rotateAngleX = (float) (-13.89F * Math.PI/180);
+        		this.LBackLeg3.rotateAngleX = (float) (-80.89F * Math.PI/180);
+        		this.RBackLeg4_2.rotateAngleX = (float) (-30F * Math.PI/180);
+        		this.RBackLeg4_3.rotateAngleX = (float) (21.67F * Math.PI/180);
+        		
+        		this.RLeg1.rotateAngleX = (float) (-8.33F * Math.PI/180);
+        		this.RLeg2.rotateAngleX = (float) (-14.33F * Math.PI/180);
+        		this.RLeg3.rotateAngleX = (float) (-87.56F * Math.PI/180);
+        		this.RLeg4.rotateAngleX = (float) (13.44F * Math.PI/180);
+        		
+        		this.RLeg1_1.rotateAngleX = (float) (-8.33F * Math.PI/180);
+        		this.RLeg2_1.rotateAngleX = (float) (-14.33F * Math.PI/180);
+        		this.RLeg3_1.rotateAngleX = (float) (-87.56F * Math.PI/180);
+        		this.RLeg4_1.rotateAngleX = (float) (13.44F * Math.PI/180);
+        		
+        		this.Tail1.rotateAngleX = (float) (14.0F * Math.PI/180);
+        	}else {
+        		
+        		this.Pivot.setRotationPoint(0.0F, 12.0F, -9.0F);
+            	
+            	this.Body.rotateAngleX = (float) (-37.0F * Math.PI/180);
+            	this.BUTT.rotateAngleX = (float) (-47.0F * Math.PI/180);
+            	
+            	this.RBackLeg1.rotateAngleX = (float) (-28.0F * Math.PI/180);
+            	this.RBackLeg4.rotateAngleX = (float) (72.0F * Math.PI/180);
+            	
+            	this.LBackLeg1.rotateAngleX = (float) (-28.0F * Math.PI/180);
+            	this.RBackLeg4_2.rotateAngleX = (float) (72.0F * Math.PI/180);
+            	
+            	this.Tail1.rotateAngleX = (float) (110.0F * Math.PI/180);
+            	
+        		this.RLeg1.rotateAngleX = (float) (0F * Math.PI/180);
+        		this.RLeg2.rotateAngleX = (float) (9F * Math.PI/180);
+        		this.RLeg3.rotateAngleX = (float) (9F * Math.PI/180);
+        		this.RLeg4.rotateAngleX = (float) (-16F * Math.PI/180);
+        		
+        		this.RLeg1_1.rotateAngleX = (float) (0F * Math.PI/180);
+        		this.RLeg2_1.rotateAngleX = (float) (9F * Math.PI/180);
+        		this.RLeg3_1.rotateAngleX = (float) (9F * Math.PI/180);
+        		this.RLeg4_1.rotateAngleX = (float) (-16F * Math.PI/180);
+        	}
+        }else {
+        	
+        	this.Pivot.setRotationPoint(0.0F, 12.0F, -9.0F);
+        	
         	this.Body.rotateAngleX = (float) (0.0F * Math.PI/180);
         	this.BUTT.rotateAngleX = (float) (0.0F * Math.PI/180);
         	
         	this.RBackLeg1.rotateAngleX = (float) (-10.0F * Math.PI/180);
+    		this.RBackLeg2.rotateAngleX = (float) (-10F * Math.PI/180);
+    		this.RBackLeg3.rotateAngleX = (float) (39F * Math.PI/180);
         	this.RBackLeg4.rotateAngleX = (float) (-30.0F * Math.PI/180);
+        	this.RBackLeg4_1.rotateAngleX = (float) (10F * Math.PI/180);
+        	
         	
         	this.LBackLeg1.rotateAngleX = (float) (-10.0F * Math.PI/180);
-        	this.RBackLeg4_2.rotateAngleX = (float) (-30.0F * Math.PI/180);
-        	
+    		this.LBackLeg2.rotateAngleX = (float) (-10F * Math.PI/180);
+    		this.LBackLeg3.rotateAngleX = (float) (39F * Math.PI/180);
+    		this.RBackLeg4_2.rotateAngleX = (float) (-30.0F * Math.PI/180);
+    		this.RBackLeg4_3.rotateAngleX = (float) (10F * Math.PI/180);
+    		
         	this.Tail1.rotateAngleX = (float) (14.0F * Math.PI/180);
+        	
+    		this.RLeg1.rotateAngleX = (float) (0F * Math.PI/180);
+    		this.RLeg2.rotateAngleX = (float) (9F * Math.PI/180);
+    		this.RLeg3.rotateAngleX = (float) (9F * Math.PI/180);
+    		this.RLeg4.rotateAngleX = (float) (-16F * Math.PI/180);
+    		
+    		this.RLeg1_1.rotateAngleX = (float) (0F * Math.PI/180);
+    		this.RLeg2_1.rotateAngleX = (float) (9F * Math.PI/180);
+    		this.RLeg3_1.rotateAngleX = (float) (9F * Math.PI/180);
+    		this.RLeg4_1.rotateAngleX = (float) (-16F * Math.PI/180);
         }
-        
-        //==============END SIT ANIMATION==============
     }
 }

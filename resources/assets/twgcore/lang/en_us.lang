@@ -24,3 +24,5 @@ item.chestplate_arilium.name=Arilium Chestplate
 item.leggings_arilium.name=Arilium Leggings
 item.boots_arilium.name=Arilium Boots
 item.sword_arilium.name=Arilium Sword
+
+entity.labrador.name=Labrador
