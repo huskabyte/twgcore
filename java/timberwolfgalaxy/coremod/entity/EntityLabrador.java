@@ -4,10 +4,7 @@ import javax.annotation.Nullable;
 
 import com.google.common.base.Predicate;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityAgeable;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIBeg;
 import net.minecraft.entity.ai.EntityAIFollowOwner;
@@ -27,34 +24,25 @@ import net.minecraft.entity.monster.AbstractSkeleton;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityRabbit;
 import net.minecraft.entity.passive.EntitySheep;
-import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
-import timberwolfgalaxy.coremod.client.gui.MyGui;
 import timberwolfgalaxy.coremod.entity.ai.EntityAIDown;
+import timberwolfgalaxy.coremod.entity.ai.EntityAISitPretty;
 
-public class EntityLabrador extends EntityWolf {
-
-	protected static final DataParameter<Byte> DOWN = EntityDataManager.<Byte>createKey(EntityLabrador.class,
-			DataSerializers.BYTE);
+public class EntityLabrador extends EntityBondable {
 
 	protected EntityAIDown aiDown;
+	protected EntityAISitPretty aiSitPretty;
+	private int counter;
 
 	public EntityLabrador(World worldIn) {
 		super(worldIn);
-		
-		this.dataManager.register(DOWN, Byte.valueOf((byte)0));
-		this.setEntityInvulnerable(true);
 	}
 
 	protected void initEntityAI() {
 		this.aiSit = new EntityAISit(this);
 		this.aiDown = new EntityAIDown(this);
+		this.aiSitPretty = new EntityAISitPretty(this);
 		this.tasks.addTask(1, new EntityAISwimming(this));
 		this.tasks.addTask(2, this.aiSit);
 		this.tasks.addTask(2, this.aiDown);
@@ -79,42 +67,23 @@ public class EntityLabrador extends EntityWolf {
 	}
 
 	@Override
-	public EntityWolf createChild(EntityAgeable ageable) {
-		return null;
+	public void thisSetTrick2(boolean down) {
+		this.aiDown.setDown(down);
 	}
 
 	@Override
-	public boolean processInteract(EntityPlayer player, EnumHand hand) {
-		ItemStack itemstack = player.getHeldItem(hand);
-
-		if (this.isTamed()) {
-			if (this.isOwner(player)) {
-				Minecraft.getMinecraft().displayGuiScreen(new MyGui(this));
-				if(!this.world.isRemote) {
-					this.isJumping = false;
-				}
-				}
-			}
-		return true;
-	}
-
-	public boolean isDown() {
-		return (this.dataManager.get(DOWN).byteValue() & 2) != 0;
-	}
-	public void setDown(boolean down) {
-		byte b0 = (this.dataManager.get(DOWN)).byteValue();
-
-		if (down) {
-			this.dataManager.set(DOWN, Byte.valueOf((byte) (b0 | 2)));
-		} else {
-			this.dataManager.set(DOWN, Byte.valueOf((byte) (b0 & -3)));
-		}
+	public void thisSetTrick3(boolean sitPretty) {
+		this.aiSitPretty.setSitPretty(sitPretty);
+		counter = 40;
 	}
 	
-	public void thisSetSitting(boolean sitting){
-		this.aiSit.setSitting(sitting);
-    }
-	public void thisSetDown(boolean down){
-		this.aiDown.setDown(down);
+	@Override
+	protected void updateAITasks()
+    {	
+		counter--;
+		if(this.isTrick3() && counter <= 0) {
+			this.aiSitPretty.setSitPretty(false);
+		}
+        super.updateAITasks();
     }
 }

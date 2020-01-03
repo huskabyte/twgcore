@@ -29,6 +29,7 @@ entity.labrador.name=Labrador
 
 menu.tricks=Animal Tricks
 
-tricks.sit=Sit
-tricks.down=Lie Down
-tricks.stand=Stand
+Labrador.trick0=Sit
+Labrador.trick1=Stand
+Labrador.trick2=Lie Down
+Labrador.trick3=Beg

@@ -4,13 +4,13 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAISit;
 import timberwolfgalaxy.coremod.entity.EntityBondable;
 
-public class EntityAIDown extends EntityAISit
+public class EntityAISitPretty extends EntityAISit
 {
     private final EntityBondable tameable;
     /** If the EntityTameable is sitting. */
-    private boolean isDown;
+    private boolean isSitPretty;
 
-    public EntityAIDown(EntityBondable entityIn)
+    public EntityAISitPretty(EntityBondable entityIn)
     {
     	super(entityIn);
     	
@@ -45,7 +45,7 @@ public class EntityAIDown extends EntityAISit
             }
             else
             {
-                return this.tameable.getDistanceSq(entitylivingbase) < 144.0D && entitylivingbase.getRevengeTarget() != null ? false : this.isDown;
+                return this.tameable.getDistanceSq(entitylivingbase) < 144.0D && entitylivingbase.getRevengeTarget() != null ? false : this.isSitPretty;
             }
         }
     }
@@ -56,26 +56,25 @@ public class EntityAIDown extends EntityAISit
     public void startExecuting()
     {
         this.tameable.getNavigator().clearPath();
-        this.setDown(true);
+        this.tameable.thisSetTrick3(true);
     }
-
     /**
      * Reset the task's internal state. Called when this task is interrupted by another one
      */
     public void resetTask()
     {
-        this.setDown(false);
+        this.tameable.thisSetTrick3(false);
     }
 
     /**
      * Sets the down flag.
      */
-    public void setDown(boolean down)
+    public void setSitPretty(boolean sitpretty)
     {
-        this.tameable.setTrick2(down);
-        this.isDown = down;
+        this.tameable.setTrick3(sitpretty);
+        this.isSitPretty = sitpretty;
     }
-    public boolean getDown() {
-    	return this.tameable.isTrick2();
+    public boolean getSitPretty() {
+    	return this.tameable.isTrick3();
     }
 }
