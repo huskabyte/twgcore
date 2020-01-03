@@ -2,6 +2,7 @@ package timberwolfgalaxy.coremod.client.gui;
 
 import java.awt.Color;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiOptions;
@@ -11,13 +12,13 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import timberwolfgalaxy.coremod.entity.EntityBondable;
-import timberwolfgalaxy.coremod.entity.model.ModelLabrador;
 
 @SideOnly(Side.CLIENT)
 public class BondableGui extends GuiScreen {
 	private int saveStep;
 	private int visibleTime;
 	private EntityBondable tameable;
+	public ArrayList<BondableGuiButton> bondableButtonList = new ArrayList<BondableGuiButton>();
 
 	public BondableGui(EntityBondable tameable) {
 		this.tameable = tameable;
@@ -28,20 +29,31 @@ public class BondableGui extends GuiScreen {
 	 * the GUI is displayed and when the window resizes, the buttonList is cleared
 	 * beforehand.
 	 */
+	public void addButton(BondableGuiButton button) {
+		this.buttonList.add(button);
+		this.bondableButtonList.add(button);
+	}
+	
 	public void initGui() {
 		this.saveStep = 0;
 		this.buttonList.clear();
 		int i = -16;
 		int j = 98;
 
-		this.buttonList.add(new GuiButton(1, this.width / 2 - 50, this.height / 8 + 8, 45, 20,
+		this.addButton(new BondableGuiButton(1, this.width / 2 - 50, this.height / 8 + 8,
 				I18n.format(tameable.getName() + ".trick0")));
-		this.buttonList.add(new GuiButton(2, this.width / 2 + 5, this.height / 8 + 8, 45, 20,
+		this.addButton(new BondableGuiButton(2, this.width / 2 + 5, this.height / 8 + 8,
 				I18n.format(tameable.getName() + ".trick1")));
-		this.buttonList.add(new GuiButton(4, this.width / 2 - 50, this.height / 8 + 8 + 28, 45, 20,
+		this.addButton(new BondableGuiButton(4, this.width / 2 - 50, this.height / 8 + 38,
 				I18n.format(tameable.getName() + ".trick2")));
-		this.buttonList.add(new GuiButton(5, this.width / 2 - 100, this.height / 8 + 8 + 28, 45, 20,
+		this.addButton(new BondableGuiButton(5, this.width / 2 - 100, this.height / 8 + 38,
 				I18n.format(tameable.getName() + ".trick3")));
+		
+		bondableButtonList.get(0).learn();
+		bondableButtonList.get(1).learn();
+		
+		bondableButtonList.get(2).addDependency(bondableButtonList.get(1));
+		bondableButtonList.get(3).addDependency(bondableButtonList.get(1));
 	}
 
 	public void setTricks(boolean sit, boolean trick2, boolean trick3) {
@@ -147,17 +159,17 @@ public class BondableGui extends GuiScreen {
 					buttonList.get(index1).y + buttonList.get(index1).height
 							+ (buttonList.get(index2).y - (buttonList.get(index1).y + buttonList.get(index1).height))
 									/ 2,
-					Color.DARK_GRAY.getRGB());
+					Color.BLACK.getRGB());
 			drawHorizontalLine(buttonList.get(index1).x + buttonList.get(index1).width / 2,
 					buttonList.get(index2).x + buttonList.get(index2).width / 2,
 					buttonList.get(index1).y + buttonList.get(index1).height
 							+ (buttonList.get(index2).y - (buttonList.get(index1).y + buttonList.get(index1).height))
 									/ 2,
-					Color.DARK_GRAY.getRGB());
+					Color.BLACK.getRGB());
 			drawVerticalLine(buttonList.get(index2).x + buttonList.get(index2).width / 2, buttonList.get(index1).y
 					+ buttonList.get(index1).height
 					+ (buttonList.get(index2).y - (buttonList.get(index1).y + buttonList.get(index1).height)) / 2 - 1,
-					buttonList.get(index2).y, Color.DARK_GRAY.getRGB());
+					buttonList.get(index2).y, Color.BLACK.getRGB());
 		}
 
 	}
