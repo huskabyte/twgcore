@@ -118,4 +118,12 @@ public abstract class EntityBondable extends EntityWolf {
 	public boolean knows(int trick) {
 		return true;
 	}
+	public void tame(EntityPlayer player) {
+		this.setTamedBy(player);
+        this.navigator.clearPath();
+        this.setAttackTarget((EntityLivingBase)null);
+        this.aiSit.setSitting(true);
+        this.playTameEffect(true);
+        this.world.setEntityState(this, (byte)7);
+	}
 }
