@@ -110,4 +110,12 @@ public abstract class EntityBondable extends EntityWolf {
 
 	public void thisSetTrick3(boolean trick3) {
 	}
+	
+	public void learn(int trick) {
+	}
+	public void unlearn(int trick) {
+	}
+	public boolean knows(int trick) {
+		return true;
+	}
 }

@@ -49,8 +49,16 @@ public class BondableGui extends GuiScreen {
 		this.addButton(new BondableGuiButton(5, this.width / 2 - 100, this.height / 8 + 38,
 				I18n.format(tameable.getName() + ".trick3")));
 		
-		bondableButtonList.get(0).learn();
-		bondableButtonList.get(1).learn();
+		unlearn(bondableButtonList.get(0));
+		unlearn(bondableButtonList.get(1));
+		
+		for(int k = 0; k < bondableButtonList.size(); k++) {
+			if (tameable.knows(k)){
+				bondableButtonList.get(k).learn();
+			}else {
+				bondableButtonList.get(k).unlearn();
+			}
+		}
 		
 		bondableButtonList.get(2).addDependency(bondableButtonList.get(1));
 		bondableButtonList.get(3).addDependency(bondableButtonList.get(1));
@@ -195,5 +203,15 @@ public class BondableGui extends GuiScreen {
 		}
 
 		drawRect(x, startY + 1, x + 1, endY, color);
+	}
+	
+	protected void learn(BondableGuiButton button) {
+		button.learn();
+		tameable.learn(bondableButtonList.indexOf(button));
+	}
+	
+	protected void unlearn(BondableGuiButton button) {
+		button.unlearn();
+		tameable.unlearn(bondableButtonList.indexOf(button));
 	}
 }

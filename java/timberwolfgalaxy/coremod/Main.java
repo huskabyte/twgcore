@@ -1,5 +1,7 @@
 package timberwolfgalaxy.coremod;
 
+import java.io.File;
+
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -45,5 +47,16 @@ public class Main {
 	public static void postInit(FMLPostInitializationEvent event) {
 		
 	}
-
+	
+	
+	public void makeFile(String path) {
+		File file = new File("");
+		System.out.println(file.getAbsolutePath());
+	}
+	public void makeDirectory() {
+		
+	}
+	public void bondableWriteToPlayerFile() {
+		
+	}
 }

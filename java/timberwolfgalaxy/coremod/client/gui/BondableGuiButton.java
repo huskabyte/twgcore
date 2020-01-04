@@ -38,5 +38,10 @@ public class BondableGuiButton extends GuiButton{
 		this.unknown = false;
 		this.enabled = true;
 	}
+	
+	public void unlearn() {
+		this.unknown = true;
+		this.enabled = false;
+	}
 
 }
