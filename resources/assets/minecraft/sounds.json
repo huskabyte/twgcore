@@ -1,0 +1,12 @@
+{
+	"music.explode": {
+		"sounds": [
+			"music/explode"
+		]
+	},
+        "custom.shotgun": {
+		"sounds": [
+			"custom/shotgun"
+		]
+	}
+}

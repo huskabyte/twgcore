@@ -5,11 +5,14 @@ import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import timberwolfgalaxy.coremod.commands.CommandLearn;
+import timberwolfgalaxy.coremod.commands.CommandTame;
+import timberwolfgalaxy.coremod.commands.CommandUnlearn;
 import timberwolfgalaxy.coremod.init.BlockInit;
 import timberwolfgalaxy.coremod.init.EntityInit;
 import timberwolfgalaxy.coremod.init.ItemInit;
-import timberwolfgalaxy.coremod.proxy.ClientProxy;
 import timberwolfgalaxy.coremod.util.IHasModel;
 
 @EventBusSubscriber
@@ -40,6 +43,12 @@ public class RegistryHandler {
 	
 	public static void preInitRegistries() {
 		EntityInit.registerEntities();
+	}
+	
+	public static void serverRegistries(FMLServerStartingEvent event) {
+		event.registerServerCommand(new CommandTame());
+		event.registerServerCommand(new CommandLearn());
+		event.registerServerCommand(new CommandUnlearn());
 	}
 	
 }

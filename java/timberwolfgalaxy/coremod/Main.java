@@ -1,7 +1,5 @@
 package timberwolfgalaxy.coremod;
 
-import java.io.File;
-
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -10,6 +8,9 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.server.permission.DefaultPermissionLevel;
+import net.minecraftforge.server.permission.PermissionAPI;
 import timberwolfgalaxy.coremod.proxy.CommonProxy;
 import timberwolfgalaxy.coremod.tabs.TWGBlocks;
 import timberwolfgalaxy.coremod.tabs.TWGCombat;
@@ -41,22 +42,16 @@ public class Main {
 	
 	@EventHandler
 	public static void init(FMLInitializationEvent event) {
-		
+		PermissionAPI.registerNode("twgcore.animal.admin", DefaultPermissionLevel.NONE, "Animal Administrators - usually co-owners and bonded admins");
+		PermissionAPI.registerNode("twgcore.bonded.dog", DefaultPermissionLevel.NONE, "Bonded to dog. Allows access to EntityLabrador");
 	}
 	@EventHandler
 	public static void postInit(FMLPostInitializationEvent event) {
 		
 	}
 	
-	
-	public void makeFile(String path) {
-		File file = new File("");
-		System.out.println(file.getAbsolutePath());
-	}
-	public void makeDirectory() {
-		
-	}
-	public void bondableWriteToPlayerFile() {
-		
+	@EventHandler
+	public static void serverInit(FMLServerStartingEvent event) {
+		RegistryHandler.serverRegistries(event);
 	}
 }

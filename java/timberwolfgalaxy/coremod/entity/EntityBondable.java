@@ -1,42 +1,22 @@
 package timberwolfgalaxy.coremod.entity;
 
-import javax.annotation.Nullable;
-
-import com.google.common.base.Predicate;
-
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.ai.EntityAIAttackMelee;
-import net.minecraft.entity.ai.EntityAIBeg;
-import net.minecraft.entity.ai.EntityAIFollowOwner;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILeapAtTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIMate;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAIOwnerHurtByTarget;
-import net.minecraft.entity.ai.EntityAIOwnerHurtTarget;
-import net.minecraft.entity.ai.EntityAISit;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAITargetNonTamed;
-import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.monster.AbstractSkeleton;
-import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.entity.passive.EntityRabbit;
-import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import timberwolfgalaxy.coremod.Main;
 import timberwolfgalaxy.coremod.client.gui.BondableGui;
-import timberwolfgalaxy.coremod.entity.ai.EntityAIDown;
 
 public abstract class EntityBondable extends EntityWolf {
 
@@ -52,6 +32,14 @@ public abstract class EntityBondable extends EntityWolf {
 		this.dataManager.register(TRICK3, Byte.valueOf((byte) 0));
 		this.setEntityInvulnerable(true);
 	}
+	
+	@Override
+	protected void updateAITasks() {
+		if(this.getAttackTarget() instanceof EntityPlayer) {
+			this.setAttackTarget(null);
+		}
+		super.updateAITasks();
+	}
 
 	@Override
 	public EntityWolf createChild(EntityAgeable ageable) {
@@ -64,11 +52,17 @@ public abstract class EntityBondable extends EntityWolf {
 
 		if (this.isTamed()) {
 			if (this.isOwner(player)) {
-				Minecraft.getMinecraft().displayGuiScreen(new BondableGui(this));
 				if (!this.world.isRemote) {
 					this.isJumping = false;
 				}
+				processInteractHelper();
 			}
+		}else{
+	        NBTTagCompound tag = player.getEntityData();
+	        	if(tag.getString("entitySelected") != this.getPersistentID().toString()) {
+	        		player.sendMessage(new TextComponentString("Entity Selected!"));
+	        	}
+	        	tag.setString("entitySelected", this.getPersistentID().toString());
 		}
 		return true;
 	}
@@ -105,19 +99,17 @@ public abstract class EntityBondable extends EntityWolf {
 		this.aiSit.setSitting(sitting);
 	}
 
-	public void thisSetTrick2(boolean trick2) {
-	}
+	public abstract void thisSetTrick2(boolean trick2);
 
-	public void thisSetTrick3(boolean trick3) {
-	}
+	public abstract void thisSetTrick3(boolean trick3);
 	
-	public void learn(int trick) {
-	}
-	public void unlearn(int trick) {
-	}
-	public boolean knows(int trick) {
-		return true;
-	}
+	public abstract void learn(int trick);
+	public abstract void unlearn(int trick);
+	
+	
+	public abstract boolean knows(int i);
+	
+	
 	public void tame(EntityPlayer player) {
 		this.setTamedBy(player);
         this.navigator.clearPath();
@@ -125,5 +117,10 @@ public abstract class EntityBondable extends EntityWolf {
         this.aiSit.setSitting(true);
         this.playTameEffect(true);
         this.world.setEntityState(this, (byte)7);
+	}
+
+	@SideOnly(Side.CLIENT)
+	public void processInteractHelper(){
+		Minecraft.getMinecraft().displayGuiScreen(new BondableGui(this));
 	}
 }

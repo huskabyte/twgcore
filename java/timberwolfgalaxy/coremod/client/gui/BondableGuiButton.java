@@ -24,7 +24,7 @@ public class BondableGuiButton extends GuiButton{
 		for(int i = 0; i < dependencies.size(); i++) {
 			if(dependencies.get(i).unknown && i == dependencies.size()-1) {
 				this.unknown = true;
-			}else if(dependencies.get(i).unknown){
+			}else if(!dependencies.get(i).unknown){
 				break;
 			}
 		}

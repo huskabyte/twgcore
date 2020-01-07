@@ -37,8 +37,6 @@ public class BondableGui extends GuiScreen {
 	public void initGui() {
 		this.saveStep = 0;
 		this.buttonList.clear();
-		int i = -16;
-		int j = 98;
 
 		this.addButton(new BondableGuiButton(1, this.width / 2 - 50, this.height / 8 + 8,
 				I18n.format(tameable.getName() + ".trick0")));
@@ -48,17 +46,6 @@ public class BondableGui extends GuiScreen {
 				I18n.format(tameable.getName() + ".trick2")));
 		this.addButton(new BondableGuiButton(5, this.width / 2 - 100, this.height / 8 + 38,
 				I18n.format(tameable.getName() + ".trick3")));
-		
-		unlearn(bondableButtonList.get(0));
-		unlearn(bondableButtonList.get(1));
-		
-		for(int k = 0; k < bondableButtonList.size(); k++) {
-			if (tameable.knows(k)){
-				bondableButtonList.get(k).learn();
-			}else {
-				bondableButtonList.get(k).unlearn();
-			}
-		}
 		
 		bondableButtonList.get(2).addDependency(bondableButtonList.get(1));
 		bondableButtonList.get(3).addDependency(bondableButtonList.get(1));
@@ -128,6 +115,16 @@ public class BondableGui extends GuiScreen {
 	 */
 	public void updateScreen() {
 		super.updateScreen();
+		
+		for(BondableGuiButton button : this.bondableButtonList) {
+			if (tameable.knows(bondableButtonList.indexOf(button))){
+				button.learn();
+			}else {
+				button.unlearn();
+			}
+			button.checkForEnable();
+		}
+		
 		++this.visibleTime;
 	}
 
