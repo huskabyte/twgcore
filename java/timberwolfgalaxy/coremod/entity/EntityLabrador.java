@@ -25,8 +25,8 @@ import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityRabbit;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import timberwolfgalaxy.coremod.capabilities.TrickProvider;
 import timberwolfgalaxy.coremod.entity.ai.EntityAIDown;
 import timberwolfgalaxy.coremod.entity.ai.EntityAISitPretty;
 
@@ -90,19 +90,16 @@ public class EntityLabrador extends EntityBondable {
 	
 	@Override
 	public void learn(int trick) {
-		NBTTagCompound tag = this.getOwner().getEntityData();
-		tag.setBoolean(this.getName() + "trick" + Integer.toString(trick), true);
+		this.getOwner().getCapability(TrickProvider.TRICKS, null).setTrick(trick,  true);
 	}
 	
 	@Override
 	public void unlearn(int trick) {
-		NBTTagCompound tag = this.getOwner().getEntityData();
-		tag.setBoolean(this.getName() + "trick" + Integer.toString(trick), false);
+		this.getOwner().getCapability(TrickProvider.TRICKS, null).setTrick(trick,  false);
 	}
 	
 	@Override
 	public boolean knows(int trick) {
-		NBTTagCompound tag = this.getOwner().getEntityData();
-		return tag.getBoolean(this.getName() + "trick" + Integer.toString(trick));
+		return this.getOwner().getCapability(TrickProvider.TRICKS, null).getTrick(trick);
 	}
 }
