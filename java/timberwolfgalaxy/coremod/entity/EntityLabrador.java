@@ -26,7 +26,6 @@ import net.minecraft.entity.passive.EntityRabbit;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
-import timberwolfgalaxy.coremod.capabilities.TrickProvider;
 import timberwolfgalaxy.coremod.entity.ai.EntityAIDown;
 import timberwolfgalaxy.coremod.entity.ai.EntityAISitPretty;
 
@@ -90,16 +89,16 @@ public class EntityLabrador extends EntityBondable {
 	
 	@Override
 	public void learn(int trick) {
-		this.getOwner().getCapability(TrickProvider.TRICKS, null).setTrick(trick,  true);
+		return;
 	}
 	
 	@Override
 	public void unlearn(int trick) {
-		this.getOwner().getCapability(TrickProvider.TRICKS, null).setTrick(trick,  false);
+		return;
 	}
 	
 	@Override
 	public boolean knows(int trick) {
-		return this.getOwner().getCapability(TrickProvider.TRICKS, null).getTrick(trick);
+		return true;
 	}
 }

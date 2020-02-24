@@ -3,15 +3,12 @@ package timberwolfgalaxy.coremod.util.handlers;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelRegistryEvent;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import timberwolfgalaxy.coremod.capabilities.BondableTricks;
-import timberwolfgalaxy.coremod.capabilities.ITricks;
-import timberwolfgalaxy.coremod.capabilities.TrickStorage;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
+import timberwolfgalaxy.coremod.Main;
 import timberwolfgalaxy.coremod.commands.CommandLearn;
 import timberwolfgalaxy.coremod.commands.CommandTame;
 import timberwolfgalaxy.coremod.commands.CommandUnlearn;
@@ -48,8 +45,9 @@ public class RegistryHandler {
 	
 	public static void preInitRegistries() {
 		EntityInit.registerEntities();
-		CapabilityManager.INSTANCE.register(ITricks.class, new TrickStorage(), BondableTricks.class);
-		MinecraftForge.EVENT_BUS.register(CapabilityHandler.class);
+	}
+	
+	public static void InitRegistries() {
 	}
 	
 	public static void serverRegistries(FMLServerStartingEvent event) {

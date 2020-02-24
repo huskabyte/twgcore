@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiOptions;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import timberwolfgalaxy.coremod.entity.EntityBondable;
+import timberwolfgalaxy.coremod.util.handlers.BondablePacketHandler;
+import timberwolfgalaxy.coremod.util.packets.PacketBondableTricks;
 
 @SideOnly(Side.CLIENT)
 public class BondableGui extends GuiScreen {
@@ -62,7 +62,12 @@ public class BondableGui extends GuiScreen {
 	 * buttons)
 	 */
 	protected void actionPerformed(GuiButton button) throws IOException {
-		switch (button.id) {
+		
+		BondablePacketHandler.INSTANCE.sendToServer(new PacketBondableTricks(button.id));
+		
+		this.mc.displayGuiScreen((GuiScreen) null);
+		this.mc.setIngameFocus();
+		/*switch (button.id) {
 		case 0:
 			this.mc.displayGuiScreen(new GuiOptions(this, this.mc.gameSettings));
 			break;
@@ -107,7 +112,7 @@ public class BondableGui extends GuiScreen {
 			this.mc.displayGuiScreen((GuiScreen) null);
 			this.mc.setIngameFocus();
 			break;
-		}
+		}*/
 	}
 
 	/**

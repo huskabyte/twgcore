@@ -9,6 +9,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.server.permission.DefaultPermissionLevel;
 import net.minecraftforge.server.permission.PermissionAPI;
 import timberwolfgalaxy.coremod.proxy.CommonProxy;
@@ -19,6 +20,8 @@ import timberwolfgalaxy.coremod.tabs.TWGMaterials;
 import timberwolfgalaxy.coremod.tabs.TWGTools;
 import timberwolfgalaxy.coremod.util.Reference;
 import timberwolfgalaxy.coremod.util.handlers.RegistryHandler;
+import timberwolfgalaxy.coremod.util.handlers.BondablePacketHandler;
+import timberwolfgalaxy.coremod.util.packets.PacketBondableTricks;
 
 @Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION)
 public class Main {
@@ -42,8 +45,15 @@ public class Main {
 	
 	@EventHandler
 	public static void init(FMLInitializationEvent event) {
-		PermissionAPI.registerNode("twgcore.animal.admin", DefaultPermissionLevel.NONE, "Animal Administrators - usually co-owners and bonded admins");
+		PermissionAPI.registerNode("twgcore.animal.admin", DefaultPermissionLevel.OP, "Animal Administrators - usually co-owners and bonded admins");
+		
 		PermissionAPI.registerNode("twgcore.bonded.dog", DefaultPermissionLevel.NONE, "Bonded to dog. Allows access to EntityLabrador");
+		PermissionAPI.registerNode("twgcore.bonded.dog.trick0", DefaultPermissionLevel.NONE, "Labrador - SIT - Useless w/o twgcore.bonded.dog");
+		PermissionAPI.registerNode("twgcore.bonded.dog.trick1", DefaultPermissionLevel.NONE, "Labrador - STAND - Useless w/o twgcore.bonded.dog");
+		PermissionAPI.registerNode("twgcore.bonded.dog.trick2", DefaultPermissionLevel.NONE, "Labrador - DOWN - Useless w/o twgcore.bonded.dog");
+		PermissionAPI.registerNode("twgcore.bonded.dog.trick3", DefaultPermissionLevel.NONE, "Labrador - BEG - Useless w/o twgcore.bonded.dog");
+		
+		BondablePacketHandler.INSTANCE.registerMessage(BondablePacketHandler.class, PacketBondableTricks.class, 0, Side.SERVER);
 	}
 	@EventHandler
 	public static void postInit(FMLPostInitializationEvent event) {
@@ -51,7 +61,7 @@ public class Main {
 	}
 	
 	@EventHandler
-	public static void serverInit(FMLServerStartingEvent event) {
+	public static void serverInit(FMLServerStartingEvent event){
 		RegistryHandler.serverRegistries(event);
 	}
 }

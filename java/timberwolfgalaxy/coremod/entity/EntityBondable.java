@@ -15,8 +15,6 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import timberwolfgalaxy.coremod.capabilities.ITricks;
-import timberwolfgalaxy.coremod.capabilities.TrickProvider;
 import timberwolfgalaxy.coremod.client.gui.BondableGui;
 
 public abstract class EntityBondable extends EntityWolf {
@@ -25,8 +23,6 @@ public abstract class EntityBondable extends EntityWolf {
 			DataSerializers.BYTE);
 	protected static final DataParameter<Byte> TRICK3 = EntityDataManager.<Byte>createKey(EntityBondable.class,
 			DataSerializers.BYTE);
-	
-	protected ITricks tricks;
 
 	public EntityBondable(World worldIn) {
 		super(worldIn);
@@ -61,11 +57,6 @@ public abstract class EntityBondable extends EntityWolf {
 				if (!this.world.isRemote) {
 					this.isJumping = false;
 				}
-				tricks = this.getOwner().getCapability(TrickProvider.TRICKS, null);
-				this.learn(0);
-				this.learn(1);
-				this.learn(2);
-				this.learn(3);
 				processInteractHelper();
 			}
 		}else{
@@ -129,9 +120,9 @@ public abstract class EntityBondable extends EntityWolf {
         this.playTameEffect(true);
         this.world.setEntityState(this, (byte)7);
 	}
-
+	
 	@SideOnly(Side.CLIENT)
-	public void processInteractHelper(){
+	public void processInteractHelper() {
 		Minecraft.getMinecraft().displayGuiScreen(new BondableGui(this));
 	}
 }
