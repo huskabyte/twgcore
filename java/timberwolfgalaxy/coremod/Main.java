@@ -45,9 +45,14 @@ public class Main {
 	
 	@EventHandler
 	public static void init(FMLInitializationEvent event) {
-		PermissionAPI.registerNode("twgcore.animal.admin", DefaultPermissionLevel.OP, "Animal Administrators - usually co-owners and bonded admins");
+		PermissionAPI.registerNode("twgcore.developer", DefaultPermissionLevel.NONE, "Developer - Testers and developers. CAN BREAK THINGS.");
+		
+		PermissionAPI.registerNode("twgcore.animal.admin", DefaultPermissionLevel.NONE, "Animal Administrators - usually co-owners and bonded admins");
+		
+		PermissionAPI.registerNode("twgcore.bonded", DefaultPermissionLevel.NONE, "Bonded to dog. Allows access to EntityLabrador");
 		
 		PermissionAPI.registerNode("twgcore.bonded.dog", DefaultPermissionLevel.NONE, "Bonded to dog. Allows access to EntityLabrador");
+		
 		PermissionAPI.registerNode("twgcore.bonded.dog.trick0", DefaultPermissionLevel.NONE, "Labrador - SIT - Useless w/o twgcore.bonded.dog");
 		PermissionAPI.registerNode("twgcore.bonded.dog.trick1", DefaultPermissionLevel.NONE, "Labrador - STAND - Useless w/o twgcore.bonded.dog");
 		PermissionAPI.registerNode("twgcore.bonded.dog.trick2", DefaultPermissionLevel.NONE, "Labrador - DOWN - Useless w/o twgcore.bonded.dog");

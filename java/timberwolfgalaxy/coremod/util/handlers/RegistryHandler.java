@@ -7,11 +7,7 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
-import timberwolfgalaxy.coremod.Main;
-import timberwolfgalaxy.coremod.commands.CommandLearn;
 import timberwolfgalaxy.coremod.commands.CommandTame;
-import timberwolfgalaxy.coremod.commands.CommandUnlearn;
 import timberwolfgalaxy.coremod.init.BlockInit;
 import timberwolfgalaxy.coremod.init.EntityInit;
 import timberwolfgalaxy.coremod.init.ItemInit;
@@ -53,8 +49,6 @@ public class RegistryHandler {
 	public static void serverRegistries(FMLServerStartingEvent event) {
 		
 		event.registerServerCommand(new CommandTame());
-		event.registerServerCommand(new CommandLearn());
-		event.registerServerCommand(new CommandUnlearn());
 	}
 	
 }

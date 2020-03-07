@@ -209,11 +209,10 @@ public class BondableGui extends GuiScreen {
 	
 	protected void learn(BondableGuiButton button) {
 		button.learn();
-		tameable.learn(bondableButtonList.indexOf(button));
+		//HI
 	}
 	
 	protected void unlearn(BondableGuiButton button) {
 		button.unlearn();
-		tameable.unlearn(bondableButtonList.indexOf(button));
 	}
 }

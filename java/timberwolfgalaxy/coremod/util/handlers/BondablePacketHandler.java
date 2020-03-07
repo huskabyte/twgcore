@@ -20,7 +20,6 @@ public class BondablePacketHandler implements IMessageHandler<PacketBondableTric
 	public IMessage onMessage(PacketBondableTricks message, MessageContext ctx) {
 		EntityPlayerMP serverPlayer = ctx.getServerHandler().player;
 		EntityPlayer player = ctx.getServerHandler().player;
-		player.sendMessage(new TextComponentString("Packet Received!"));
 		this.trick = message.getTrick();
 		serverPlayer.getServerWorld().addScheduledTask(() -> {
 		      for(Entity entity : player.world.loadedEntityList) {

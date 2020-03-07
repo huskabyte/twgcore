@@ -13,6 +13,7 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import timberwolfgalaxy.coremod.client.gui.BondableGui;
@@ -37,9 +38,11 @@ public abstract class EntityBondable extends EntityWolf {
 		if(this.getAttackTarget() instanceof EntityPlayer) {
 			this.setAttackTarget(null);
 		}
-		if(this.isTamed()) {
-			
+
+		if(FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().getPlayerByUUID(this.getOwnerId()) == null) {
+			this.setDead();
 		}
+		
 		super.updateAITasks();
 	}
 
@@ -81,6 +84,8 @@ public abstract class EntityBondable extends EntityWolf {
 		} else {
 			this.dataManager.set(TRICK2, Byte.valueOf((byte) (b0 & -3)));
 		}
+		
+		this.dataManager.setDirty(TRICK2);
 	}
 
 	public boolean isTrick3() {
@@ -95,6 +100,8 @@ public abstract class EntityBondable extends EntityWolf {
 		} else {
 			this.dataManager.set(TRICK3, Byte.valueOf((byte) (b0 & -3)));
 		}
+		
+		this.dataManager.setDirty(TRICK3);
 	}
 
 	public void thisSetSitting(boolean sitting) {
@@ -104,9 +111,6 @@ public abstract class EntityBondable extends EntityWolf {
 	public abstract void thisSetTrick2(boolean trick2);
 
 	public abstract void thisSetTrick3(boolean trick3);
-	
-	public abstract void learn(int trick);
-	public abstract void unlearn(int trick);
 	
 	
 	public abstract boolean knows(int i);

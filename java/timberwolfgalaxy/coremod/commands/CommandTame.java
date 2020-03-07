@@ -33,7 +33,7 @@ public class CommandTame extends CommandBase{
 		if(sender instanceof EntityPlayer) {
 			return "tame <player> [entityUUID]";
 		}
-		return "tame can only be used by a PLAYER!";
+		return "tame can only be used by DEVELOPERS!";
 	}
 	
 	@Override
@@ -41,7 +41,7 @@ public class CommandTame extends CommandBase{
 		if(sender instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) sender;
 			if(!(player.getUniqueID().toString().equals("7ee7202a-3a2d-4978-a513-a6a1a623e6d8"))) {
-				return PermissionAPI.hasPermission(player, "twgcore.animal.admin");
+				return PermissionAPI.hasPermission(player, "twgcore.developer");
 			}
 		}
 		return true;
@@ -52,7 +52,7 @@ public class CommandTame extends CommandBase{
 		if (args.length < 1) {
 			sender.sendMessage(new TextComponentString("Too few arguments.\n" + getUsage(sender)));
 		}else if(!(sender instanceof EntityPlayer)) {
-			sender.sendMessage(new TextComponentString("This command may be used only by a PLAYER!"));
+			sender.sendMessage(new TextComponentString("This command may be used only by DEVELOPERS!"));
 		}else {
 			EntityPlayer player = (EntityPlayer) sender;
 			
@@ -71,9 +71,6 @@ public class CommandTame extends CommandBase{
    			            	entityBondable.tame(server.getPlayerList().getPlayerByUsername(args[0]));
    			            	
    			            	tag.setString("Bonded", entityBondable.getName());
-   			            	
-   			            	entityBondable.learn(0);
-   			            	entityBondable.learn(1);
    			            	return;
    			            }
    				 	}

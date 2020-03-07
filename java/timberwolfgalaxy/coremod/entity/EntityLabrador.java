@@ -25,7 +25,10 @@ import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityRabbit;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.server.permission.PermissionAPI;
 import timberwolfgalaxy.coremod.entity.ai.EntityAIDown;
 import timberwolfgalaxy.coremod.entity.ai.EntityAISitPretty;
 
@@ -84,21 +87,15 @@ public class EntityLabrador extends EntityBondable {
 		if(this.isTrick3() && counter <= 0) {
 			this.aiSitPretty.setSitPretty(false);
 		}
+		
         super.updateAITasks();
     }
 	
 	@Override
-	public void learn(int trick) {
-		return;
-	}
-	
-	@Override
-	public void unlearn(int trick) {
-		return;
-	}
-	
-	@Override
 	public boolean knows(int trick) {
-		return true;
+		if(this.isTamed()) {
+			return PermissionAPI.hasPermission((EntityPlayer) this.getOwner(), "twgcore.bonded.dog.trick" + Integer.toString(trick)) || this.getOwner().getUniqueID().toString().equals("7ee7202a-3a2d-4978-a513-a6a1a623e6d8");
+		}
+		return false;
 	}
 }
