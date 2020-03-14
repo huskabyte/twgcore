@@ -12,6 +12,8 @@ public class Reference {
 	
 	
 	public static final int ENTITY_DOG = 120;
+	public static final int ENTITY_WOLF = 121;
+	public static final int ENTITY_WOLFDOG = 122;
 	
 	public static final int GUI_BONDABLE = 100;
 }

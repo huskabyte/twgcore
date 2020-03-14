@@ -30,13 +30,12 @@ import net.minecraftforge.server.permission.PermissionAPI;
 import timberwolfgalaxy.coremod.entity.ai.EntityAIDown;
 import timberwolfgalaxy.coremod.entity.ai.EntityAISitPretty;
 
-public class EntityLabrador extends EntityBondable {
-
+public class EntityWolf extends EntityBondable{
 	protected EntityAIDown aiDown;
 	protected EntityAISitPretty aiSitPretty;
 	private int counter;
 
-	public EntityLabrador(World worldIn) {
+	public EntityWolf(World worldIn) {
 		super(worldIn);
 	}
 
@@ -92,9 +91,8 @@ public class EntityLabrador extends EntityBondable {
 	@Override
 	public boolean knows(int trick) {
 		if(this.isTamed()) {
-			return PermissionAPI.hasPermission((EntityPlayer) this.getOwner(), "twgcore.bonded.dog.trick" + Integer.toString(trick)) || this.getOwner().getUniqueID().toString().equals("7ee7202a-3a2d-4978-a513-a6a1a623e6d8");
+			return PermissionAPI.hasPermission((EntityPlayer) this.getOwner(), "twgcore.bonded.wolf.trick" + Integer.toString(trick)) || this.getOwner().getUniqueID().toString().equals("7ee7202a-3a2d-4978-a513-a6a1a623e6d8");
 		}
 		return false;
 	}
-
 }

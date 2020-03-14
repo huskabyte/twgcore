@@ -37,6 +37,8 @@ public class BondableGui extends GuiScreen {
 	public void initGui() {
 		this.saveStep = 0;
 		this.buttonList.clear();
+		
+		this.addButton(new BondableGuiButton(0, 0, 0, I18n.format("bonded.switch")));
 
 		this.addButton(new BondableGuiButton(1, this.width / 2 - 50, this.height / 8 + 8,
 				I18n.format(tameable.getName() + ".trick0")));
@@ -63,56 +65,15 @@ public class BondableGui extends GuiScreen {
 	 */
 	protected void actionPerformed(GuiButton button) throws IOException {
 		
+		if(button.id == 0) {
+			this.mc.displayGuiScreen((GuiScreen) new BondableSwitchGui());
+			return;
+		}
+		
 		BondablePacketHandler.INSTANCE.sendToServer(new PacketBondableTricks(button.id));
 		
 		this.mc.displayGuiScreen((GuiScreen) null);
 		this.mc.setIngameFocus();
-		/*switch (button.id) {
-		case 0:
-			this.mc.displayGuiScreen(new GuiOptions(this, this.mc.gameSettings));
-			break;
-		case 1:
-			if (!this.tameable.world.isRemote) {
-				setTricks(true, false, false);
-				this.tameable.getNavigator().clearPath();
-				this.tameable.setAttackTarget((EntityLivingBase) null);
-			}
-			this.mc.displayGuiScreen((GuiScreen) null);
-			this.mc.setIngameFocus();
-			break;
-
-		case 2:
-			if (!this.tameable.world.isRemote) {
-				setTricks(false, false, false);
-				this.tameable.getNavigator().clearPath();
-				this.tameable.setAttackTarget((EntityLivingBase) null);
-			}
-			this.mc.displayGuiScreen((GuiScreen) null);
-			this.mc.setIngameFocus();
-			break;
-
-		case 3:
-		default:
-			break;
-		case 4:
-			if (!this.tameable.world.isRemote) {
-				setTricks(true, true, false);
-				this.tameable.getNavigator().clearPath();
-				this.tameable.setAttackTarget((EntityLivingBase) null);
-			}
-			this.mc.displayGuiScreen((GuiScreen) null);
-			this.mc.setIngameFocus();
-			break;
-		case 5:
-			if (!this.tameable.world.isRemote) {
-				setTricks(true, false, true);
-				this.tameable.getNavigator().clearPath();
-				this.tameable.setAttackTarget((EntityLivingBase) null);
-			}
-			this.mc.displayGuiScreen((GuiScreen) null);
-			this.mc.setIngameFocus();
-			break;
-		}*/
 	}
 
 	/**
@@ -141,8 +102,8 @@ public class BondableGui extends GuiScreen {
 		this.drawCenteredString(this.fontRenderer, I18n.format("menu.tricks"), this.width / 2, 4, 16777215);
 		super.drawScreen(mouseX, mouseY, partialTicks);
 
-		this.drawConnector(0, 2);
-		this.drawConnector(0, 3);
+		this.drawConnector(1, 3);
+		this.drawConnector(1, 4);
 	}
 
 	public void drawConnector(int index1, int index2) {

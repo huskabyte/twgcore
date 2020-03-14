@@ -1,8 +1,11 @@
 package timberwolfgalaxy.coremod.entity;
 
-import net.minecraft.client.Minecraft;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.EntityList;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -11,12 +14,15 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-import timberwolfgalaxy.coremod.client.gui.BondableGui;
+import net.minecraftforge.server.permission.PermissionAPI;
+import timberwolfgalaxy.coremod.Main;
+import timberwolfgalaxy.coremod.util.Reference;
 
 public abstract class EntityBondable extends EntityWolf {
 
@@ -60,7 +66,7 @@ public abstract class EntityBondable extends EntityWolf {
 				if (!this.world.isRemote) {
 					this.isJumping = false;
 				}
-				processInteractHelper();
+				Main.proxy.processInteractHelper(this);
 			}
 		}else{
 	        NBTTagCompound tag = player.getEntityData();
@@ -115,18 +121,38 @@ public abstract class EntityBondable extends EntityWolf {
 	
 	public abstract boolean knows(int i);
 	
+	public static boolean hasBondable(EntityPlayer player, Class<? extends EntityBondable> bondable) {
+		return PermissionAPI.hasPermission(player, "twgcore.bonded." + bondable.getName()) || player.getUniqueID().toString().equals("7ee7202a-3a2d-4978-a513-a6a1a623e6d8");
+	}
+	
 	
 	public void tame(EntityPlayer player) {
 		this.setTamedBy(player);
         this.navigator.clearPath();
         this.setAttackTarget((EntityLivingBase)null);
         this.aiSit.setSitting(true);
-        this.playTameEffect(true);
+        this.playTameEffect(false);
         this.world.setEntityState(this, (byte)7);
 	}
 	
-	@SideOnly(Side.CLIENT)
-	public void processInteractHelper() {
-		Minecraft.getMinecraft().displayGuiScreen(new BondableGui(this));
+	public static Entity spawnBondable(double posX, double posY, double posZ, String name, World worldIn) {
+		Entity entity = null;
+		 for (int i = 0; i < 1; ++i)
+         {
+             entity = EntityList.createEntityByIDFromName(new ResourceLocation(Reference.MODID + ":" + name), worldIn);
+
+             if (entity instanceof EntityLiving)
+             {
+                 EntityLiving entityliving = (EntityLiving)entity;
+                 entity.setLocationAndAngles(posX, posY, posZ, MathHelper.wrapDegrees(worldIn.rand.nextFloat() * 360.0F), 0.0F);
+                 entityliving.rotationYawHead = entityliving.rotationYaw;
+                 entityliving.renderYawOffset = entityliving.rotationYaw;
+                 entityliving.onInitialSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityliving)), (IEntityLivingData)null);
+                 worldIn.spawnEntity(entity);
+                 entityliving.playLivingSound();
+             }
+         }
+
+         return entity;
 	}
 }

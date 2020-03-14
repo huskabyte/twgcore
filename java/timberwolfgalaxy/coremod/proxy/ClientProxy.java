@@ -1,9 +1,12 @@
 package timberwolfgalaxy.coremod.proxy;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
+import timberwolfgalaxy.coremod.client.gui.BondableGui;
+import timberwolfgalaxy.coremod.entity.EntityBondable;
 import timberwolfgalaxy.coremod.util.Reference;
 import timberwolfgalaxy.coremod.util.handlers.RenderHandler;
 
@@ -21,5 +24,8 @@ public class ClientProxy extends CommonProxy{
 	@Override
 	public void registerEntityRenders() {
 		RenderHandler.registerEntityRenders();
+	}
+	public void processInteractHelper(EntityBondable entity) {
+		Minecraft.getMinecraft().displayGuiScreen(new BondableGui(entity));
 	}
 }

@@ -13,8 +13,9 @@ import timberwolfgalaxy.coremod.entity.EntityBondable;
 import timberwolfgalaxy.coremod.util.packets.PacketBondableTricks;
 
 public class BondablePacketHandler implements IMessageHandler<PacketBondableTricks, IMessage>{
+	
+	public static final SimpleNetworkWrapper INSTANCE = NetworkRegistry.INSTANCE.newSimpleChannel("twgcore.bondable");
 	private int trick;
-	public static final SimpleNetworkWrapper INSTANCE = NetworkRegistry.INSTANCE.newSimpleChannel("twgcore");
 	
 	@Override
 	public IMessage onMessage(PacketBondableTricks message, MessageContext ctx) {

@@ -19,8 +19,10 @@ import timberwolfgalaxy.coremod.tabs.TWGCurrency;
 import timberwolfgalaxy.coremod.tabs.TWGMaterials;
 import timberwolfgalaxy.coremod.tabs.TWGTools;
 import timberwolfgalaxy.coremod.util.Reference;
-import timberwolfgalaxy.coremod.util.handlers.RegistryHandler;
 import timberwolfgalaxy.coremod.util.handlers.BondablePacketHandler;
+import timberwolfgalaxy.coremod.util.handlers.RegistryHandler;
+import timberwolfgalaxy.coremod.util.handlers.SwitchPacketHandler;
+import timberwolfgalaxy.coremod.util.packets.PacketBondableSwitch;
 import timberwolfgalaxy.coremod.util.packets.PacketBondableTricks;
 
 @Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION)
@@ -58,7 +60,22 @@ public class Main {
 		PermissionAPI.registerNode("twgcore.bonded.dog.trick2", DefaultPermissionLevel.NONE, "Labrador - DOWN - Useless w/o twgcore.bonded.dog");
 		PermissionAPI.registerNode("twgcore.bonded.dog.trick3", DefaultPermissionLevel.NONE, "Labrador - BEG - Useless w/o twgcore.bonded.dog");
 		
+		PermissionAPI.registerNode("twgcore.bonded.wolf", DefaultPermissionLevel.NONE, "Bonded to wolf. Allows access to EntityWolf");
+		
+		PermissionAPI.registerNode("twgcore.bonded.wolf.trick0", DefaultPermissionLevel.NONE, "Wolf - SIT - Useless w/o twgcore.bonded.wolf");
+		PermissionAPI.registerNode("twgcore.bonded.wolf.trick1", DefaultPermissionLevel.NONE, "Wolf - STAND - Useless w/o twgcore.bonded.wolf");
+		PermissionAPI.registerNode("twgcore.bonded.wolf.trick2", DefaultPermissionLevel.NONE, "Wolf - DOWN - Useless w/o twgcore.bonded.wolf");
+		PermissionAPI.registerNode("twgcore.bonded.wolf.trick3", DefaultPermissionLevel.NONE, "Wolf - BEG - Useless w/o twgcore.bonded.wolf");
+		
+		PermissionAPI.registerNode("twgcore.bonded.wolfdog", DefaultPermissionLevel.NONE, "Bonded to wolfdog. Allows access to EntityWolfdog");
+		
+		PermissionAPI.registerNode("twgcore.bonded.wolfdog.trick0", DefaultPermissionLevel.NONE, "Wolfdog - SIT - Useless w/o twgcore.bonded.wolfdog");
+		PermissionAPI.registerNode("twgcore.bonded.wolfdog.trick1", DefaultPermissionLevel.NONE, "Wolfdog - STAND - Useless w/o twgcore.bonded.wolfdog");
+		PermissionAPI.registerNode("twgcore.bonded.wolfdog.trick2", DefaultPermissionLevel.NONE, "Wolfdog - DOWN - Useless w/o twgcore.bonded.wolfdog");
+		PermissionAPI.registerNode("twgcore.bonded.wolfdog.trick3", DefaultPermissionLevel.NONE, "Wolfdog - BEG - Useless w/o twgcore.bonded.wolfdog");
+		
 		BondablePacketHandler.INSTANCE.registerMessage(BondablePacketHandler.class, PacketBondableTricks.class, 0, Side.SERVER);
+		SwitchPacketHandler.INSTANCE.registerMessage(SwitchPacketHandler.class, PacketBondableSwitch.class, 0, Side.SERVER);
 	}
 	@EventHandler
 	public static void postInit(FMLPostInitializationEvent event) {

@@ -12,6 +12,7 @@ import net.minecraftforge.common.util.EnumHelper;
 import timberwolfgalaxy.coremod.objects.armor.ArmorArilium;
 import timberwolfgalaxy.coremod.objects.items.ItemAriliumIngot;
 import timberwolfgalaxy.coremod.objects.items.ItemCarrackCoin;
+import timberwolfgalaxy.coremod.objects.items.ItemDragonbornAmulet;
 import timberwolfgalaxy.coremod.objects.items.ItemRadianCoin;
 import timberwolfgalaxy.coremod.objects.items.ItemSilverCoin;
 import timberwolfgalaxy.coremod.objects.tools.ToolAriliumAxe;
@@ -48,4 +49,7 @@ public class ItemInit {
 	public static final Item CHESTPLATE_ARILIUM = new ArmorArilium("chestplate_arilium", ARMOR_ARILIUM, 3, EntityEquipmentSlot.CHEST);
 	public static final Item LEGGINGS_ARILIUM = new ArmorArilium("leggings_arilium", ARMOR_ARILIUM, 2, EntityEquipmentSlot.LEGS);
 	public static final Item BOOTS_ARILIUM = new ArmorArilium("boots_arilium", ARMOR_ARILIUM, 1, EntityEquipmentSlot.FEET);
+	
+	//Amulets
+	public static final Item AMULET_DRAGONBORN = new ItemDragonbornAmulet("dragonborn_amulet");
 }
