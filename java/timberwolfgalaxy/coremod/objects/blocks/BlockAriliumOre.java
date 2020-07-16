@@ -1,10 +1,17 @@
 package timberwolfgalaxy.coremod.objects.blocks;
 
+import java.util.ArrayList;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
+import net.minecraftforge.oredict.OreDictionary;
 import timberwolfgalaxy.coremod.Main;
 import timberwolfgalaxy.coremod.init.BlockInit;
 import timberwolfgalaxy.coremod.init.ItemInit;
@@ -38,6 +45,15 @@ public class BlockAriliumOre extends Block implements IHasModel, IMetaName{
 	@Override
 	public String getSpecialName(ItemStack stack) {
 		return null;
+	}
+	
+	@Override 
+	public ArrayList<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState blockstate, int fortune){
+		ArrayList<ItemStack> drops = new ArrayList<ItemStack>();
+		
+		drops.add(new ItemStack(ItemInit.INGOT_ARILIUM, 1));
+		
+		return drops;
 	}
 
 }

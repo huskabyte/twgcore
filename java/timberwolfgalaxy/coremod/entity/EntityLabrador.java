@@ -92,9 +92,37 @@ public class EntityLabrador extends EntityBondable {
 	@Override
 	public boolean knows(int trick) {
 		if(this.isTamed()) {
-			return PermissionAPI.hasPermission((EntityPlayer) this.getOwner(), "twgcore.bonded.dog.trick" + Integer.toString(trick)) || this.getOwner().getUniqueID().toString().equals("7ee7202a-3a2d-4978-a513-a6a1a623e6d8");
+			if(trick == 0 || trick == 1 || trick == 2) {
+				return true;
+			}else {
+				if(trick == 3) {
+					return (this.dataManager.get(KNOWSTRICK2).byteValue() & 2) != 0;
+				}
+				if(trick == 4) {
+					return (this.dataManager.get(KNOWSTRICK3).byteValue() & 2) != 0;
+				}
+			}
 		}
 		return false;
+	}
+
+	@Override
+	protected void registerKnownTricks() {
+		if(this.isTamed() && !this.world.isRemote) {
+			byte b0 = (this.dataManager.get(KNOWSTRICK2)).byteValue();
+			byte b1 = (this.dataManager.get(KNOWSTRICK3)).byteValue();
+			
+			if(PermissionAPI.hasPermission((EntityPlayer) this.getOwner(), "twgcore.bonded.dog.trick2")) {
+				this.dataManager.set(KNOWSTRICK2, Byte.valueOf((byte) (b0 | 2)));
+			}else {
+				this.dataManager.set(KNOWSTRICK2, Byte.valueOf((byte) (b0 & -3)));
+			}
+			if(PermissionAPI.hasPermission((EntityPlayer) this.getOwner(), "twgcore.bonded.dog.trick3")) {
+				this.dataManager.set(KNOWSTRICK3, Byte.valueOf((byte) (b1 | 2)));
+			}else {
+				this.dataManager.set(KNOWSTRICK3, Byte.valueOf((byte) (b1 & -3)));
+			}
+		}
 	}
 
 }

@@ -1,0 +1,21 @@
+{
+    "type": "minecraft:crafting_shaped",
+    
+    "pattern":
+    [
+        "AAA",
+        "A A",
+        "A A"
+    ],
+    
+    "key":
+    {
+        "A": {"item": "twgcore:ingot_arilium"}
+    },
+    
+    "result":
+    {
+        "item": "twgcore:leggings_arilium",
+        "count": 1
+    }
+}

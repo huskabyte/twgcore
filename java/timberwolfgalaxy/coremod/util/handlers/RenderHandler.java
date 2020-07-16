@@ -5,9 +5,11 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import timberwolfgalaxy.coremod.entity.EntityLabrador;
+import timberwolfgalaxy.coremod.entity.EntityPenguin;
 import timberwolfgalaxy.coremod.entity.EntityWolf;
 import timberwolfgalaxy.coremod.entity.EntityWolfdog;
 import timberwolfgalaxy.coremod.entity.render.RenderLabrador;
+import timberwolfgalaxy.coremod.entity.render.RenderPenguin;
 import timberwolfgalaxy.coremod.entity.render.RenderWolf;
 import timberwolfgalaxy.coremod.entity.render.RenderWolfdog;
 
@@ -36,6 +38,15 @@ public class RenderHandler {
 			@Override
 			public Render<? super EntityWolfdog> createRenderFor(RenderManager manager) {
 				return new RenderWolfdog(manager);
+			}
+		
+		});
+		
+		RenderingRegistry.registerEntityRenderingHandler(EntityPenguin.class, new IRenderFactory<EntityPenguin>() {
+
+			@Override
+			public Render<? super EntityPenguin> createRenderFor(RenderManager manager) {
+				return new RenderPenguin(manager);
 			}
 		
 		});

@@ -2,11 +2,15 @@ package timberwolfgalaxy.coremod.util.handlers;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.oredict.OreDictionary;
+import timberwolfgalaxy.coremod.commands.CommandPassiveBondable;
+import timberwolfgalaxy.coremod.commands.CommandSummonBondable;
 import timberwolfgalaxy.coremod.commands.CommandTame;
 import timberwolfgalaxy.coremod.init.BlockInit;
 import timberwolfgalaxy.coremod.init.EntityInit;
@@ -44,10 +48,16 @@ public class RegistryHandler {
 	}
 	
 	public static void InitRegistries() {
+		OreDictionary.registerOre("oreCarrack", new ItemStack(BlockInit.ORE_CARRACK));
+		OreDictionary.registerOre("oreSilver", new ItemStack(BlockInit.ORE_SILVER));
+		OreDictionary.registerOre("oreRadian", new ItemStack(BlockInit.ORE_RADIAN));
+		OreDictionary.registerOre("oreArilium", new ItemStack(BlockInit.ORE_ARILIUM));
 	}
 	
 	public static void serverRegistries(FMLServerStartingEvent event) {
 		event.registerServerCommand(new CommandTame());
+		event.registerServerCommand(new CommandSummonBondable());
+		event.registerServerCommand(new CommandPassiveBondable());
 	}
 	
 }

@@ -15,6 +15,7 @@ import timberwolfgalaxy.coremod.objects.items.ItemCarrackCoin;
 import timberwolfgalaxy.coremod.objects.items.ItemDragonbornAmulet;
 import timberwolfgalaxy.coremod.objects.items.ItemRadianCoin;
 import timberwolfgalaxy.coremod.objects.items.ItemSilverCoin;
+import timberwolfgalaxy.coremod.objects.items.Wand;
 import timberwolfgalaxy.coremod.objects.tools.ToolAriliumAxe;
 import timberwolfgalaxy.coremod.objects.tools.ToolAriliumHoe;
 import timberwolfgalaxy.coremod.objects.tools.ToolAriliumPickaxe;
@@ -52,4 +53,17 @@ public class ItemInit {
 	
 	//Amulets
 	public static final Item AMULET_DRAGONBORN = new ItemDragonbornAmulet("dragonborn_amulet");
+	
+	//Wands
+	public static final Item WAND_BLAND = new Wand("wand_bland");
+	public static final Item WAND_DRAGONHEARTSTRING = new Wand("wand_dragonheartstring");
+	public static final Item WAND_ELDER = new Wand("wand_elder");
+	public static final Item WAND_KELPIE = new Wand("wand_kelpie");
+	public static final Item WAND_PHOENIX = new Wand("wand_phoenix");
+	public static final Item WAND_ROUGAROU = new Wand("wand_rougarou");
+	public static final Item WAND_STAFF = new Wand("wand_staff");
+	public static final Item WAND_THUNDERBIRD = new Wand("wand_thunderbird");
+	public static final Item WAND_TROLL = new Wand("wand_troll");
+	public static final Item WAND_UNICORN = new Wand("wand_unicorn");
+	public static final Item WAND_VEELA = new Wand("wand_veela");
 }

@@ -3,11 +3,13 @@ package timberwolfgalaxy.coremod.init;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import timberwolfgalaxy.coremod.Main;
 import timberwolfgalaxy.coremod.entity.EntityBondable;
 import timberwolfgalaxy.coremod.entity.EntityLabrador;
+import timberwolfgalaxy.coremod.entity.EntityPenguin;
 import timberwolfgalaxy.coremod.entity.EntityWolf;
 import timberwolfgalaxy.coremod.entity.EntityWolfdog;
 import timberwolfgalaxy.coremod.util.Reference;
@@ -18,9 +20,10 @@ public class EntityInit {
 	public static final HashMap<String, Class<? extends EntityBondable>> bondableIdMap = new HashMap<String, Class<? extends EntityBondable>>();
 	
 	public static void registerEntities() {
-		registerEntity("dog", EntityLabrador.class, Reference.ENTITY_DOG, 50);
-		registerEntity("wolf", EntityWolf.class, Reference.ENTITY_WOLF, 50);
-		registerEntity("wolfdog", EntityWolfdog.class, Reference.ENTITY_WOLFDOG, 50);
+		registerEntity("dog", EntityLabrador.class, Reference.ENTITY_DOG, Integer.MAX_VALUE);
+		registerEntity("wolf", EntityWolf.class, Reference.ENTITY_WOLF, Integer.MAX_VALUE);
+		registerEntity("wolfdog", EntityWolfdog.class, Reference.ENTITY_WOLFDOG, Integer.MAX_VALUE);
+		registerEntity("penguin", EntityPenguin.class, Reference.ENTITY_PENGUIN, Integer.MAX_VALUE);
 	}
 	
 	private static void registerEntity(String name, Class<? extends EntityBondable> entityClass, int id, int range, int color1, int color2) {

@@ -1,5 +1,7 @@
 package timberwolfgalaxy.coremod.entity;
 
+import java.util.HashMap;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityList;
@@ -22,6 +24,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.server.permission.PermissionAPI;
 import timberwolfgalaxy.coremod.Main;
+import timberwolfgalaxy.coremod.init.EntityInit;
 import timberwolfgalaxy.coremod.util.Reference;
 
 public abstract class EntityBondable extends EntityWolf {
@@ -30,14 +33,29 @@ public abstract class EntityBondable extends EntityWolf {
 			DataSerializers.BYTE);
 	protected static final DataParameter<Byte> TRICK3 = EntityDataManager.<Byte>createKey(EntityBondable.class,
 			DataSerializers.BYTE);
+	protected static final DataParameter<Byte> KNOWSTRICK2 = EntityDataManager.<Byte>createKey(EntityBondable.class,
+			DataSerializers.BYTE);
+	protected static final DataParameter<Byte> KNOWSTRICK3 = EntityDataManager.<Byte>createKey(EntityBondable.class,
+			DataSerializers.BYTE);
+	
+	public HashMap<String, DataParameter<Byte>> hasBondable = new HashMap<String, DataParameter<Byte>>();
 
 	public EntityBondable(World worldIn) {
 		super(worldIn);
 
 		this.dataManager.register(TRICK2, Byte.valueOf((byte) 0));
 		this.dataManager.register(TRICK3, Byte.valueOf((byte) 0));
+		
+		this.dataManager.register(KNOWSTRICK2, Byte.valueOf((byte) 0));
+		this.dataManager.register(KNOWSTRICK3, Byte.valueOf((byte) 0));
+		
+		
+		
+		this.registerKnownTricks();
 		this.setEntityInvulnerable(true);
 	}
+	
+	protected abstract void registerKnownTricks();
 	
 	@Override
 	protected void updateAITasks() {
@@ -48,7 +66,6 @@ public abstract class EntityBondable extends EntityWolf {
 		if(FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().getPlayerByUUID(this.getOwnerId()) == null) {
 			this.setDead();
 		}
-		
 		super.updateAITasks();
 	}
 
@@ -63,6 +80,7 @@ public abstract class EntityBondable extends EntityWolf {
 
 		if (this.isTamed()) {
 			if (this.isOwner(player)) {
+				this.registerKnownTricks();
 				if (!this.world.isRemote) {
 					this.isJumping = false;
 				}
@@ -154,5 +172,10 @@ public abstract class EntityBondable extends EntityWolf {
          }
 
          return entity;
+	}
+	
+	@Override
+	public void setDead() {
+		super.setDead();
 	}
 }

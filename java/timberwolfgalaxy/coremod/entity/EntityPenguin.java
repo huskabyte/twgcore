@@ -30,12 +30,12 @@ import net.minecraftforge.server.permission.PermissionAPI;
 import timberwolfgalaxy.coremod.entity.ai.EntityAIDown;
 import timberwolfgalaxy.coremod.entity.ai.EntityAISitPretty;
 
-public class EntityWolf extends EntityBondable{
+public class EntityPenguin extends EntityBondable{
 	protected EntityAIDown aiDown;
 	protected EntityAISitPretty aiSitPretty;
 	private int counter;
 
-	public EntityWolf(World worldIn) {
+	public EntityPenguin(World worldIn) {
 		super(worldIn);
 	}
 
@@ -57,13 +57,6 @@ public class EntityWolf extends EntityBondable{
 		this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
 		this.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));
 		this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true, new Class[0]));
-		this.targetTasks.addTask(4,
-				new EntityAITargetNonTamed(this, EntityAnimal.class, false, new Predicate<Entity>() {
-					public boolean apply(@Nullable Entity p_apply_1_) {
-						return p_apply_1_ instanceof EntitySheep || p_apply_1_ instanceof EntityRabbit;
-					}
-				}));
-		this.targetTasks.addTask(5, new EntityAINearestAttackableTarget(this, AbstractSkeleton.class, false));
 	}
 
 	@Override
@@ -111,12 +104,12 @@ public class EntityWolf extends EntityBondable{
 			byte b0 = (this.dataManager.get(KNOWSTRICK2)).byteValue();
 			byte b1 = (this.dataManager.get(KNOWSTRICK3)).byteValue();
 			
-			if(PermissionAPI.hasPermission((EntityPlayer) this.getOwner(), "twgcore.bonded.wolf.trick2")) {
+			if(PermissionAPI.hasPermission((EntityPlayer) this.getOwner(), "twgcore.bonded.penguin.trick2")) {
 				this.dataManager.set(KNOWSTRICK2, Byte.valueOf((byte) (b0 | 2)));
 			}else {
 				this.dataManager.set(KNOWSTRICK2, Byte.valueOf((byte) (b0 & -3)));
 			}
-			if(PermissionAPI.hasPermission((EntityPlayer) this.getOwner(), "twgcore.bonded.wolf.trick3")) {
+			if(PermissionAPI.hasPermission((EntityPlayer) this.getOwner(), "twgcore.bonded.penguin.trick3")) {
 				this.dataManager.set(KNOWSTRICK3, Byte.valueOf((byte) (b1 | 2)));
 			}else {
 				this.dataManager.set(KNOWSTRICK3, Byte.valueOf((byte) (b1 & -3)));

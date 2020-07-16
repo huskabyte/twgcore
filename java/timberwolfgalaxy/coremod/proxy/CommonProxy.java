@@ -1,7 +1,10 @@
 package timberwolfgalaxy.coremod.proxy;
 
+import baubles.api.render.IRenderBauble.RenderType;
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import timberwolfgalaxy.coremod.client.gui.BondableGui;
@@ -15,5 +18,7 @@ public class CommonProxy {
 	public void registerEntityRenders() {
 	}
 	public void processInteractHelper(EntityBondable entity) {
+	}
+	public void onDragonbornRender(ItemStack stack, EntityPlayer player, RenderType renderType, float fl) {
 	}
 }

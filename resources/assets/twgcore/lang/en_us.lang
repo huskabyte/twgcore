@@ -1,0 +1,72 @@
+itemGroup.twgblockstab=Blocks
+tile.ore_silver.name=Silver Ore
+tile.ore_carrack.name=Carrack Ore
+tile.ore_radian.name=Radian Ore
+tile.ore_arilium.name=Arilium Ore
+
+itemGroup.twgcurrencytab=Currency
+item.coin_carrack.name=Carrack
+item.coin_silver.name=Silver Coin
+item.coin_radian.name=Radian
+
+itemGroup.twgmaterialtab=Materials
+item.ingot_arilium.name=Arilium Ingot
+
+itemGroup.twgtoolstab=Tools
+item.axe_arilium.name=Arilium Axe
+item.hoe_arilium.name=Arilium Hoe
+item.pickaxe_arilium.name=Arilium Pickaxe
+item.shovel_arilium.name=Arilium Shovel
+
+itemGroup.twgcombattab=Combat
+item.helmet_arilium.name=Arilium Helmet
+item.chestplate_arilium.name=Arilium Chestplate
+item.leggings_arilium.name=Arilium Leggings
+item.boots_arilium.name=Arilium Boots
+item.sword_arilium.name=Arilium Sword
+item.dragonborn_amulet.name=Amulet of the Dragonborn
+
+itemGroup.twgwandstab=Wands
+item.wand_bland.name=Wand
+item.wand_dragonheartstring.name=Wand
+item.wand_elder.name=Wand
+item.wand_kelpie.name=Wand
+item.wand_rougarou.name=Wand
+item.wand_staff.name=Special Wand
+item.wand_thunderbird.name=Wand
+item.wand_troll.name=Wand
+item.wand_unicorn.name=Wand
+item.wand_veela.name=Wand
+item.wand_phoenix.name=Wand
+
+entity.dog.name=Dog
+entity.wolf.name=Wolf
+entity.wolfdog.name=Wolfdog
+entity.penguin.name=Penguin
+
+menu.tricks=Animal Tricks
+menu.page=Page
+
+menu.switch=Switch Animal
+bonded.switch=Switch
+bonded.close=Exit
+
+Dog.trick0=Sit
+Dog.trick1=Stand
+Dog.trick2=Lie Down
+Dog.trick3=Beg
+
+Wolf.trick0=Sit
+Wolf.trick1=Stand
+Wolf.trick2=Lie Down
+Wolf.trick3=Beg
+
+Wolfdog.trick0=Sit
+Wolfdog.trick1=Stand
+Wolfdog.trick2=Lie Down
+Wolfdog.trick3=Beg
+
+Penguin.trick0=Sit
+Penguin.trick1=Stand
+Penguin.trick2=Faceplant
+Penguin.trick3=Wave
