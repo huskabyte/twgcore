@@ -1,5 +1,6 @@
 package timberwolfgalaxy.coremod.entity;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import net.minecraft.entity.Entity;
@@ -38,7 +39,7 @@ public abstract class EntityBondable extends EntityWolf {
 	protected static final DataParameter<Byte> KNOWSTRICK3 = EntityDataManager.<Byte>createKey(EntityBondable.class,
 			DataSerializers.BYTE);
 	
-	public HashMap<String, DataParameter<Byte>> hasBondable = new HashMap<String, DataParameter<Byte>>();
+	public static final DataParameter<String> PERMS = EntityDataManager.<String>createKey(EntityBondable.class, DataSerializers.STRING);
 
 	public EntityBondable(World worldIn) {
 		super(worldIn);
@@ -49,13 +50,25 @@ public abstract class EntityBondable extends EntityWolf {
 		this.dataManager.register(KNOWSTRICK2, Byte.valueOf((byte) 0));
 		this.dataManager.register(KNOWSTRICK3, Byte.valueOf((byte) 0));
 		
-		
+		this.dataManager.register(PERMS, "");
 		
 		this.registerKnownTricks();
 		this.setEntityInvulnerable(true);
 	}
 	
 	protected abstract void registerKnownTricks();
+	
+	protected void setPerms() {
+		if(this.isTamed() && !this.world.isRemote) {
+			String s = "";
+			for(String b : EntityInit.bondableIdList) {
+				if(PermissionAPI.hasPermission((EntityPlayer) this.getOwner(), "twgcore.bonded."+b)) {
+					s += (b+" ");
+				}
+			}
+			this.dataManager.set(PERMS, s);
+		}
+	}
 	
 	@Override
 	protected void updateAITasks() {
@@ -77,10 +90,10 @@ public abstract class EntityBondable extends EntityWolf {
 	@Override
 	public boolean processInteract(EntityPlayer player, EnumHand hand) {
 		ItemStack itemstack = player.getHeldItem(hand);
-
 		if (this.isTamed()) {
 			if (this.isOwner(player)) {
 				this.registerKnownTricks();
+				this.setPerms();
 				if (!this.world.isRemote) {
 					this.isJumping = false;
 				}
@@ -139,8 +152,8 @@ public abstract class EntityBondable extends EntityWolf {
 	
 	public abstract boolean knows(int i);
 	
-	public static boolean hasBondable(EntityPlayer player, Class<? extends EntityBondable> bondable) {
-		return PermissionAPI.hasPermission(player, "twgcore.bonded." + bondable.getName()) || player.getUniqueID().toString().equals("7ee7202a-3a2d-4978-a513-a6a1a623e6d8");
+	public static boolean hasBondable(EntityBondable bondable, String bondable2) {
+		return bondable.dataManager.get(PERMS).contains(bondable2);
 	}
 	
 	

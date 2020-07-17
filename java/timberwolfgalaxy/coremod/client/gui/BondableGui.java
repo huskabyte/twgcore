@@ -66,7 +66,7 @@ public class BondableGui extends GuiScreen {
 	protected void actionPerformed(GuiButton button) throws IOException {
 		
 		if(button.id == 0) {
-			this.mc.displayGuiScreen((GuiScreen) new BondableSwitchGui());
+			this.mc.displayGuiScreen((GuiScreen) new BondableSwitchGui(tameable));
 			return;
 		}
 		

@@ -19,8 +19,10 @@ public class BondableSwitchGui extends GuiScreen {
 	private int saveStep;
 	private int visibleTime;
 	private int page = 0;
+	private EntityBondable bondable;
 
-	public BondableSwitchGui() {
+	public BondableSwitchGui(EntityBondable bondable) {
+		this.bondable = bondable;
 	}
 
 	public void addButton(BondableGuiButton button) {
@@ -78,8 +80,10 @@ public class BondableSwitchGui extends GuiScreen {
 	
 	private void addButtons() {
 		for(int i = 0; i + (page * 25) < EntityInit.bondableIdList.size() && i < 25; i++) {
-			if(EntityBondable.hasBondable((EntityPlayer)Minecraft.getMinecraft().player, EntityInit.bondableIdMap.get(EntityInit.bondableIdList.get(i)))) {
-				this.addButton(new GuiButton(i + (page * 25), (int)(70*((Math.floor(i/5)) + 1)), 40 * (i%5 + 1), 70, 20, I18n.format("entity." + EntityInit.bondableIdList.get(i + (page * 25)) + ".name")));
+			if(EntityBondable.hasBondable(bondable, EntityInit.bondableIdList.get(i))) {
+				GuiButton button = new GuiButton(i + (page * 25), (int)(70*((Math.floor(i/5)) + 1)), 40 * (i%5 + 1), 70, 20, I18n.format("entity." + EntityInit.bondableIdList.get(i + (page * 25)) + ".name"));
+				button.enabled = true;
+				this.addButton(button);
 			}else {
 				GuiButton button = new GuiButton(i + (page * 25), (int)(70*((Math.floor(i/5)) + 1)), 40 * (i%5 + 1), 70, 20, I18n.format("entity." + EntityInit.bondableIdList.get(i + (page * 25)) + ".name"));
 				button.enabled = false;
