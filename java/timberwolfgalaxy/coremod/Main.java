@@ -3,6 +3,7 @@ package timberwolfgalaxy.coremod;
 import java.io.File;
 
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -15,6 +16,13 @@ import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.server.permission.DefaultPermissionLevel;
 import net.minecraftforge.server.permission.PermissionAPI;
+import timberwolfgalaxy.coremod.capabilty.ISelectedSpell;
+import timberwolfgalaxy.coremod.capabilty.ISpellSlots;
+import timberwolfgalaxy.coremod.capabilty.SelectedSpell;
+import timberwolfgalaxy.coremod.capabilty.SelectedSpellStorage;
+import timberwolfgalaxy.coremod.capabilty.SpellSlots;
+import timberwolfgalaxy.coremod.capabilty.SpellSlotsStorage;
+import timberwolfgalaxy.coremod.init.PotionEffectInit;
 import timberwolfgalaxy.coremod.proxy.CommonProxy;
 import timberwolfgalaxy.coremod.tabs.TWGBlocks;
 import timberwolfgalaxy.coremod.tabs.TWGCombat;
@@ -52,10 +60,14 @@ public class Main {
 		RegistryHandler.preInitRegistries();
 		proxy.registerEntityRenders();
 		FMLCommonHandler.instance().bus().register(new TWGEventHandler());
+		PotionEffectInit.registerEffects();
 	}
 	
 	@EventHandler
 	public static void init(FMLInitializationEvent event) {
+		
+		CapabilityManager.INSTANCE.register(ISelectedSpell.class, new SelectedSpellStorage(), SelectedSpell.class);
+		CapabilityManager.INSTANCE.register(ISpellSlots.class, new SpellSlotsStorage(), SpellSlots.class);
 		
 		PermissionAPI.registerNode("twgcore.developer", DefaultPermissionLevel.NONE, "Developer - Testers and developers. CAN BREAK THINGS.");
 		

@@ -1,10 +1,7 @@
 package timberwolfgalaxy.coremod.objects.items;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-
-import com.mojang.realmsclient.gui.ChatFormatting;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,9 +12,12 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import timberwolfgalaxy.coremod.Main;
+import timberwolfgalaxy.coremod.capabilty.SelectedSpellProvider;
+import timberwolfgalaxy.coremod.capabilty.SpellSlotsProvider;
 import timberwolfgalaxy.coremod.init.ItemInit;
 import timberwolfgalaxy.coremod.objects.items.spells.Spell;
 import timberwolfgalaxy.coremod.objects.items.spells.SpellFireball;
+import timberwolfgalaxy.coremod.objects.items.spells.SpellPoisonBlast;
 import timberwolfgalaxy.coremod.util.IHasModel;
 
 public class Wand extends Item implements IHasModel{
@@ -28,20 +28,27 @@ public class Wand extends Item implements IHasModel{
 		setUnlocalizedName(name);
 		setRegistryName(name);
 		setCreativeTab(Main.TWGWANDSTAB);
-		
-		addSpells();
+		if(SPELLS.isEmpty()) {
+			addSpells();
+		}
 		ItemInit.ITEMS.add(this);
 	}
 	
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
+		playerIn.getCapability(SelectedSpellProvider.SELECTED_SPELL, null).nextSpell();
+		String message = String.format("Selected Spell:", Wand.SPELLS.get(playerIn.getCapability(SelectedSpellProvider.SELECTED_SPELL, null).getSpell()).getName());
+		if(playerIn.world.isRemote) {
+			playerIn.sendMessage(new TextComponentString(Wand.SPELLS.get(playerIn.getCapability(SelectedSpellProvider.SELECTED_SPELL, null).getSpell()).getName()));
+		}
 		return super.onItemRightClick(worldIn, playerIn, handIn);
 	}
 	
 	@Override
 	public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack) {
 		if(entityLiving instanceof EntityPlayer) {
-			cast(SPELLS.get(0), (EntityPlayer) entityLiving);
+			System.out.println(SPELLS.get(entityLiving.getCapability(SelectedSpellProvider.SELECTED_SPELL, null).getSpell()).getName());
+			cast(SPELLS.get(entityLiving.getCapability(SelectedSpellProvider.SELECTED_SPELL, null).getSpell()), (EntityPlayer) entityLiving);
 			return false;
 		}
 		return super.onEntitySwing(entityLiving, stack);
@@ -53,12 +60,20 @@ public class Wand extends Item implements IHasModel{
 	}
 	
 	private static void cast(Spell s, EntityPlayer player){
-		s.message(s, player);
-		s.cast(player, player.world);
+		if(player.getCapability(SpellSlotsProvider.SPELL_SLOTS, null).getSlots()[s.slot()-1] > 0) {
+			s.message(s, player);
+			s.cast(player, player.world);
+			player.getCapability(SpellSlotsProvider.SPELL_SLOTS, null).consume(s.slot(), 1);
+		}else {
+			if(player.world.isRemote) {
+				player.sendMessage(new TextComponentString("You're out of level " + s.slot() + " spell slots! Rest to gain them back!"));
+			}
+		}
 	}
 	
 	private static void addSpells() {
 		SPELLS.add(new SpellFireball());
+		SPELLS.add(new SpellPoisonBlast());
 	}
 	
 	public void registerSpell(Spell s) {
@@ -70,6 +85,7 @@ public class Wand extends Item implements IHasModel{
 		return false;
 	}
 	
+	@Deprecated
 	private int getSpellByName(String spellname) {
 		for(int i = 0; i < SPELLS.size(); i++) {
 			if(SPELLS.get(i).getName().equals(spellname)) {

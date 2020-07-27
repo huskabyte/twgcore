@@ -7,7 +7,7 @@ import net.minecraft.world.World;
 public abstract class Spell{
 	protected String color;
 	protected String name;
-	protected int slot;
+	public abstract int slot();
 	
 	public abstract void cast(EntityPlayer player, World world);
 	

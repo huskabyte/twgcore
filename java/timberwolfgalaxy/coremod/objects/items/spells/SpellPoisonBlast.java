@@ -1,21 +1,20 @@
 package timberwolfgalaxy.coremod.objects.items.spells;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.projectile.EntityLargeFireball;
 import net.minecraft.world.World;
-import timberwolfgalaxy.coremod.entity.EntitySpellFireball;
+import timberwolfgalaxy.coremod.entity.EntitySpellPoisonBlast;
 
-public class SpellFireball extends Spell {
+public class SpellPoisonBlast extends Spell {
 
-	public SpellFireball() {
-		this.color = "&C";
-		this.name = "Fireball";
+	public SpellPoisonBlast() {
+		this.color = "&2";
+		this.name = "Poison Blast";
 	}
 
 	@Override
 	public void cast(EntityPlayer player, World world) {
-		if (!world.isRemote) {
-			EntitySpellFireball fireball2 = new EntitySpellFireball(world, player, 1, 1, 1);
+		if(!world.isRemote) {
+			EntitySpellPoisonBlast fireball2 = new EntitySpellPoisonBlast(world, player, 1, 1, 1);
 			fireball2.setPosition(player.posX + player.getLookVec().x * 5, player.posY + player.getLookVec().y * 5,
 					player.posZ + player.getLookVec().z * 5);
 			fireball2.accelerationX = player.getLookVec().x * 0.1;
@@ -28,7 +27,7 @@ public class SpellFireball extends Spell {
 
 	@Override
 	public int slot() {
-		return 3;
+		return 2;
 	}
 
 }

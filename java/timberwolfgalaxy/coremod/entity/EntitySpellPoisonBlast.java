@@ -16,24 +16,23 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import timberwolfgalaxy.coremod.init.PotionEffectInit;
 
-public class EntitySpellFireball extends EntityLargeFireball{
+public class EntitySpellPoisonBlast extends EntityLargeFireball{
 
-    public EntitySpellFireball(World worldIn)
+    public EntitySpellPoisonBlast(World worldIn)
     {
         super(worldIn);
         this.setSize(1.0F, 1.0F);
     }
 
     @SideOnly(Side.CLIENT)
-    public EntitySpellFireball(World worldIn, double x, double y, double z, double accelX, double accelY, double accelZ)
+    public EntitySpellPoisonBlast(World worldIn, double x, double y, double z, double accelX, double accelY, double accelZ)
     {
         super(worldIn, x, y, z, accelX, accelY, accelZ);
         this.setSize(1.0F, 1.0F);
     }
 
-    public EntitySpellFireball(World worldIn, EntityLivingBase shooter, double accelX, double accelY, double accelZ)
+    public EntitySpellPoisonBlast(World worldIn, EntityLivingBase shooter, double accelX, double accelY, double accelZ)
     {
         super(worldIn, shooter, accelX, accelY, accelZ);
         this.setSize(1.0F, 1.0F);
@@ -56,12 +55,12 @@ public class EntitySpellFireball extends EntityLargeFireball{
                 List<EntityLivingBase> list = this.world.<EntityLivingBase>getEntitiesWithinAABB(EntityLivingBase.class, this.getEntityBoundingBox().grow(4.0D, 2.0D, 4.0D));
                 EntityAreaEffectCloud entityareaeffectcloud = new EntityAreaEffectCloud(this.world, this.posX, this.posY-1, this.posZ);
                 entityareaeffectcloud.setOwner(this.shootingEntity);
-                entityareaeffectcloud.setParticle(EnumParticleTypes.FLAME);
+                entityareaeffectcloud.setParticle(EnumParticleTypes.SLIME);
                 entityareaeffectcloud.setRadius(3.0F);
                 entityareaeffectcloud.height = 3;
                 entityareaeffectcloud.setDuration(100);
                 entityareaeffectcloud.setRadiusPerTick((7.0F - entityareaeffectcloud.getRadius()) / (float)entityareaeffectcloud.getDuration());
-                entityareaeffectcloud.addEffect(new PotionEffect(PotionEffectInit.STRAIGHT_FIRE, 1, 1));
+                entityareaeffectcloud.addEffect(new PotionEffect(MobEffects.POISON, 100, 2));
 
                 if (!list.isEmpty())
                 {
@@ -102,7 +101,7 @@ public class EntitySpellFireball extends EntityLargeFireball{
 
     protected EnumParticleTypes getParticleType()
     {
-        return EnumParticleTypes.FLAME;
+        return EnumParticleTypes.SLIME;
     }
 
     protected boolean isFireballFiery()

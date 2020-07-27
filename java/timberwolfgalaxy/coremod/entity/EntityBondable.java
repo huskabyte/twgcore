@@ -38,45 +38,49 @@ public abstract class EntityBondable extends EntityWolf {
 			DataSerializers.BYTE);
 	protected static final DataParameter<Byte> KNOWSTRICK3 = EntityDataManager.<Byte>createKey(EntityBondable.class,
 			DataSerializers.BYTE);
+
+	public static final DataParameter<String> PERMS = EntityDataManager.<String>createKey(EntityBondable.class,
+			DataSerializers.STRING);
 	
-	public static final DataParameter<String> PERMS = EntityDataManager.<String>createKey(EntityBondable.class, DataSerializers.STRING);
+	public static final ArrayList<ArrayList<String>> crateMap = new ArrayList<ArrayList<String>>();
 
 	public EntityBondable(World worldIn) {
 		super(worldIn);
 
 		this.dataManager.register(TRICK2, Byte.valueOf((byte) 0));
 		this.dataManager.register(TRICK3, Byte.valueOf((byte) 0));
-		
+
 		this.dataManager.register(KNOWSTRICK2, Byte.valueOf((byte) 0));
 		this.dataManager.register(KNOWSTRICK3, Byte.valueOf((byte) 0));
-		
+
 		this.dataManager.register(PERMS, "");
-		
+
 		this.registerKnownTricks();
 		this.setEntityInvulnerable(true);
 	}
-	
+
 	protected abstract void registerKnownTricks();
-	
+
 	protected void setPerms() {
-		if(this.isTamed() && !this.world.isRemote) {
+		if (this.isTamed() && !this.world.isRemote) {
 			String s = "";
-			for(String b : EntityInit.bondableIdList) {
-				if(PermissionAPI.hasPermission((EntityPlayer) this.getOwner(), "twgcore.bonded."+b)) {
-					s += (b+" ");
+			for (String b : EntityInit.bondableIdList) {
+				if (PermissionAPI.hasPermission((EntityPlayer) this.getOwner(), "twgcore.bonded." + b)) {
+					s += (b + " ");
 				}
 			}
 			this.dataManager.set(PERMS, s);
 		}
 	}
-	
+
 	@Override
 	protected void updateAITasks() {
-		if(this.getAttackTarget() instanceof EntityPlayer) {
+		if (this.getAttackTarget() instanceof EntityPlayer) {
 			this.setAttackTarget(null);
 		}
 
-		if(FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().getPlayerByUUID(this.getOwnerId()) == null) {
+		if (FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList()
+				.getPlayerByUUID(this.getOwnerId()) == null) {
 			this.setDead();
 		}
 		super.updateAITasks();
@@ -99,12 +103,12 @@ public abstract class EntityBondable extends EntityWolf {
 				}
 				Main.proxy.processInteractHelper(this);
 			}
-		}else{
-	        NBTTagCompound tag = player.getEntityData();
-	        	if(tag.getString("entitySelected") != this.getPersistentID().toString()) {
-	        		player.sendMessage(new TextComponentString("Entity Selected!"));
-	        	}
-	        	tag.setString("entitySelected", this.getPersistentID().toString());
+		} else {
+			NBTTagCompound tag = player.getEntityData();
+			if (tag.getString("entitySelected") != this.getPersistentID().toString()) {
+				player.sendMessage(new TextComponentString("Entity Selected!"));
+			}
+			tag.setString("entitySelected", this.getPersistentID().toString());
 		}
 		return true;
 	}
@@ -121,7 +125,7 @@ public abstract class EntityBondable extends EntityWolf {
 		} else {
 			this.dataManager.set(TRICK2, Byte.valueOf((byte) (b0 & -3)));
 		}
-		
+
 		this.dataManager.setDirty(TRICK2);
 	}
 
@@ -137,7 +141,7 @@ public abstract class EntityBondable extends EntityWolf {
 		} else {
 			this.dataManager.set(TRICK3, Byte.valueOf((byte) (b0 & -3)));
 		}
-		
+
 		this.dataManager.setDirty(TRICK3);
 	}
 
@@ -148,45 +152,43 @@ public abstract class EntityBondable extends EntityWolf {
 	public abstract void thisSetTrick2(boolean trick2);
 
 	public abstract void thisSetTrick3(boolean trick3);
-	
-	
+
 	public abstract boolean knows(int i);
-	
+
 	public static boolean hasBondable(EntityBondable bondable, String bondable2) {
 		return bondable.dataManager.get(PERMS).contains(bondable2);
 	}
-	
-	
+
 	public void tame(EntityPlayer player) {
 		this.setTamedBy(player);
-        this.navigator.clearPath();
-        this.setAttackTarget((EntityLivingBase)null);
-        this.aiSit.setSitting(true);
-        this.playTameEffect(false);
-        this.world.setEntityState(this, (byte)7);
+		this.navigator.clearPath();
+		this.setAttackTarget((EntityLivingBase) null);
+		this.aiSit.setSitting(true);
+		this.playTameEffect(false);
+		this.world.setEntityState(this, (byte) 7);
 	}
-	
+
 	public static Entity spawnBondable(double posX, double posY, double posZ, String name, World worldIn) {
 		Entity entity = null;
-		 for (int i = 0; i < 1; ++i)
-         {
-             entity = EntityList.createEntityByIDFromName(new ResourceLocation(Reference.MODID + ":" + name), worldIn);
+		for (int i = 0; i < 1; ++i) {
+			entity = EntityList.createEntityByIDFromName(new ResourceLocation(Reference.MODID + ":" + name), worldIn);
 
-             if (entity instanceof EntityLiving)
-             {
-                 EntityLiving entityliving = (EntityLiving)entity;
-                 entity.setLocationAndAngles(posX, posY, posZ, MathHelper.wrapDegrees(worldIn.rand.nextFloat() * 360.0F), 0.0F);
-                 entityliving.rotationYawHead = entityliving.rotationYaw;
-                 entityliving.renderYawOffset = entityliving.rotationYaw;
-                 entityliving.onInitialSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityliving)), (IEntityLivingData)null);
-                 worldIn.spawnEntity(entity);
-                 entityliving.playLivingSound();
-             }
-         }
+			if (entity instanceof EntityLiving) {
+				EntityLiving entityliving = (EntityLiving) entity;
+				entity.setLocationAndAngles(posX, posY, posZ, MathHelper.wrapDegrees(worldIn.rand.nextFloat() * 360.0F),
+						0.0F);
+				entityliving.rotationYawHead = entityliving.rotationYaw;
+				entityliving.renderYawOffset = entityliving.rotationYaw;
+				entityliving.onInitialSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityliving)),
+						(IEntityLivingData) null);
+				worldIn.spawnEntity(entity);
+				entityliving.playLivingSound();
+			}
+		}
 
-         return entity;
+		return entity;
 	}
-	
+
 	@Override
 	public void setDead() {
 		super.setDead();
