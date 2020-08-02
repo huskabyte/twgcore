@@ -34,7 +34,7 @@ public class SpellSlots implements ISpellSlots{
 	}
 
 	@Override
-	public int[] getMaxSlots() {
+	public int[] getMaxSlots(int level) {
 		int[] spellSlots= {4, 3, 2, 0, 0, 0, 0, 0, 0};
 		return spellSlots;
 	}

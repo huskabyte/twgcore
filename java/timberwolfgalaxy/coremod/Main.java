@@ -98,10 +98,12 @@ public class Main {
 		
 		PermissionAPI.registerNode("twgcore.bonded.penguin", DefaultPermissionLevel.NONE, "Bonded to wolfdog. Allows access to EntityWolfdog");
 		
-		PermissionAPI.registerNode("twgcore.bonded.penguin.trick0", DefaultPermissionLevel.NONE, "Wolfdog - SIT - Useless w/o twgcore.bonded.wolfdog");
-		PermissionAPI.registerNode("twgcore.bonded.penguin.trick1", DefaultPermissionLevel.NONE, "Wolfdog - STAND - Useless w/o twgcore.bonded.wolfdog");
-		PermissionAPI.registerNode("twgcore.bonded.penguin.trick2", DefaultPermissionLevel.NONE, "Wolfdog - DOWN - Useless w/o twgcore.bonded.wolfdog");
-		PermissionAPI.registerNode("twgcore.bonded.penguin.trick3", DefaultPermissionLevel.NONE, "Wolfdog - BEG - Useless w/o twgcore.bonded.wolfdog");
+		PermissionAPI.registerNode("twgcore.bonded.penguin.trick0", DefaultPermissionLevel.NONE, "Penguin - SIT - Useless w/o twgcore.bonded.wolfdog");
+		PermissionAPI.registerNode("twgcore.bonded.penguin.trick1", DefaultPermissionLevel.NONE, "Penguin - STAND - Useless w/o twgcore.bonded.wolfdog");
+		PermissionAPI.registerNode("twgcore.bonded.penguin.trick2", DefaultPermissionLevel.NONE, "Penguin - DOWN - Useless w/o twgcore.bonded.wolfdog");
+		PermissionAPI.registerNode("twgcore.bonded.penguin.trick3", DefaultPermissionLevel.NONE, "Penguin - BEG - Useless w/o twgcore.bonded.wolfdog");
+		
+		PermissionAPI.registerNode("twgcore.insurvival", DefaultPermissionLevel.NONE, "Wolfdog - BEG - Useless w/o twgcore.bonded.wolfdog");
 		
 		BondablePacketHandler.INSTANCE.registerMessage(BondablePacketHandler.class, PacketBondableTricks.class, 0, Side.SERVER);
 		SwitchPacketHandler.INSTANCE.registerMessage(SwitchPacketHandler.class, PacketBondableSwitch.class, 0, Side.SERVER);

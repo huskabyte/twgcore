@@ -47,7 +47,7 @@ public class TWGEventHandler {
 			int[] spellSlots = mc.player.getCapability(SpellSlotsProvider.SPELL_SLOTS, null).getSlots();
 			if(mc.player.getHeldItemMainhand().getItem() instanceof Wand && Wand.SPELLS.get(mc.player.getCapability(SelectedSpellProvider.SELECTED_SPELL, null).getSpell()).slot() > 0) {
 				mc.fontRenderer.drawStringWithShadow(Integer.toString(Wand.SPELLS.get(mc.player.getCapability(SelectedSpellProvider.SELECTED_SPELL, null).getSpell()).slot()), 0, 0, Color.WHITE.getRGB());
-				for(int i = 0; i < mc.player.getCapability(SpellSlotsProvider.SPELL_SLOTS, null).getMaxSlots()[Wand.SPELLS.get(mc.player.getCapability(SelectedSpellProvider.SELECTED_SPELL, null).getSpell()).slot()-1]; i++) {
+				for(int i = 0; i < mc.player.getCapability(SpellSlotsProvider.SPELL_SLOTS, null).getMaxSlots(1)[Wand.SPELLS.get(mc.player.getCapability(SelectedSpellProvider.SELECTED_SPELL, null).getSpell()).slot()-1]; i++) {
 					if(spellSlots[Wand.SPELLS.get(mc.player.getCapability(SelectedSpellProvider.SELECTED_SPELL, null).getSpell()).slot()-1] > i) {
 						mc.fontRenderer.drawStringWithShadow("\u25cf", 10+5*(i), 0, Color.WHITE.getRGB());
 					}else {
@@ -104,6 +104,10 @@ public class TWGEventHandler {
 				}
 				event.setCanceled(true);
 			}else if(event.getState().equals(BlockInit.REGEN_BEDROCK.getDefaultState())) {
+				event.setCanceled(true);
+			}
+			
+			if(!event.getState().getBlock().getUnlocalizedName().contains("regen") && PermissionAPI.hasPermission(event.getPlayer(), "twgcore.insurvival")) {
 				event.setCanceled(true);
 			}
 		}
