@@ -1,30 +1,28 @@
 package timberwolfgalaxy.coremod.capabilty;
 
+import timberwolfgalaxy.coremod.objects.items.Wand;
+
 public class SpellSlots implements ISpellSlots{
-	private int[] spellSlots= {4, 3, 2, 0, 0, 0, 0, 0, 0};
+	private int[] spellSlots= {0, 0, 0, 0, 0, 0, 0, 0, 0};
 
 	@Override
-	public void fillSlots() {
-		spellSlots[0] = 4;
-		spellSlots[1] = 3;
-		spellSlots[2] = 2;
-		spellSlots[3] = 0;
-		spellSlots[4] = 0;
-		spellSlots[5] = 0;
-		spellSlots[6] = 0;
-		spellSlots[7] = 0;
-		spellSlots[8] = 0;
+	public void fillSlots(int level) {
+		spellSlots=getMaxSlots(level);
 	}
 
 	@Override
 	public void consume(int level, int number) {
-		spellSlots[level-1]-=number;
+		if(level > 0) {
+			spellSlots[level-1]-=number;
+		}
 		
 	}
 
 	@Override
 	public void set(int level, int number) {
-		spellSlots[level-1]=number;
+		if(level > 0) {
+			spellSlots[level-1]=number;
+		}
 		
 	}
 
@@ -35,8 +33,7 @@ public class SpellSlots implements ISpellSlots{
 
 	@Override
 	public int[] getMaxSlots(int level) {
-		int[] spellSlots= {4, 3, 2, 0, 0, 0, 0, 0, 0};
-		return spellSlots;
+		return Wand.getSpellSlotsByLevel(level);
 	}
 
 }

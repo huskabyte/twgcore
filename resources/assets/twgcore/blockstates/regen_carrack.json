@@ -1,0 +1,30 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "all": "twgcore:blocks/ore_carrack"
+    },
+    "model": "cube_all",
+    "uvlock": true
+  },
+  "variants": {
+    "ore": {
+        "0": {"model":"twgcore:ore_carrack"},
+        "1": {"model":"twgcore:ore_carrack"},
+        "2": {"model":"twgcore:ore_carrack"},
+        "3": {"model":"twgcore:ore_carrack"},
+        "4": {"model":"twgcore:ore_carrack"},
+        "5": {"model":"twgcore:ore_carrack"},
+        "6": {"model":"twgcore:ore_carrack"},
+        "7": {"model":"twgcore:ore_carrack"},
+        "8": {"model":"twgcore:ore_carrack"},
+        "9": {"model":"twgcore:ore_carrack"},
+        "10": {"model":"twgcore:ore_carrack"},
+        "11": {"model":"twgcore:ore_carrack"},
+        "12": {"model":"twgcore:ore_carrack"},
+        "13": {"model":"twgcore:ore_carrack"},
+        "14": {"model":"twgcore:ore_carrack"},
+        "15": {"model":"twgcore:ore_carrack"}
+    }
+  }
+}

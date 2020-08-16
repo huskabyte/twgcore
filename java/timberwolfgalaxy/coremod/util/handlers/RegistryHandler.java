@@ -9,6 +9,7 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.oredict.OreDictionary;
+import timberwolfgalaxy.coremod.commands.CommandLevelUp;
 import timberwolfgalaxy.coremod.commands.CommandPassiveBondable;
 import timberwolfgalaxy.coremod.commands.CommandSummonBondable;
 import timberwolfgalaxy.coremod.commands.CommandTame;
@@ -58,6 +59,7 @@ public class RegistryHandler {
 		event.registerServerCommand(new CommandTame());
 		event.registerServerCommand(new CommandSummonBondable());
 		event.registerServerCommand(new CommandPassiveBondable());
+		event.registerServerCommand(new CommandLevelUp());
 	}
 	
 }

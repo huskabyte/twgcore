@@ -1,0 +1,30 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "all": "twgcore:blocks/ore_arilium"
+    },
+    "model": "cube_all",
+    "uvlock": true
+  },
+  "variants": {
+    "ore": {
+        "0": {"model":"twgcore:ore_arilium"},
+        "1": {"model":"twgcore:ore_arilium"},
+        "2": {"model":"twgcore:ore_arilium"},
+        "3": {"model":"twgcore:ore_arilium"},
+        "4": {"model":"twgcore:ore_arilium"},
+        "5": {"model":"twgcore:ore_arilium"},
+        "6": {"model":"twgcore:ore_arilium"},
+        "7": {"model":"twgcore:ore_arilium"},
+        "8": {"model":"twgcore:ore_arilium"},
+        "9": {"model":"twgcore:ore_arilium"},
+        "10": {"model":"twgcore:ore_arilium"},
+        "11": {"model":"twgcore:ore_arilium"},
+        "12": {"model":"twgcore:ore_arilium"},
+        "13": {"model":"twgcore:ore_arilium"},
+        "14": {"model":"twgcore:ore_arilium"},
+        "15": {"model":"twgcore:ore_arilium"}
+    }
+  }
+}

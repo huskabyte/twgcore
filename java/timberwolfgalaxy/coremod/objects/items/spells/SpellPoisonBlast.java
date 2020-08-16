@@ -1,13 +1,16 @@
 package timberwolfgalaxy.coremod.objects.items.spells;
 
+import java.awt.Color;
+
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import timberwolfgalaxy.coremod.entity.EntitySpellPoisonBlast;
 
 public class SpellPoisonBlast extends Spell {
 
 	public SpellPoisonBlast() {
-		this.color = "&2";
+		this.color = TextFormatting.DARK_GREEN;
 		this.name = "Poison Blast";
 	}
 
@@ -28,6 +31,11 @@ public class SpellPoisonBlast extends Spell {
 	@Override
 	public int slot() {
 		return 2;
+	}
+
+	@Override
+	public Color getColor() {
+		return new Color(0, 42, 0);
 	}
 
 }

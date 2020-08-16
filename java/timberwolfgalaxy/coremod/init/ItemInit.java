@@ -16,6 +16,7 @@ import timberwolfgalaxy.coremod.objects.items.ItemDragonbornAmulet;
 import timberwolfgalaxy.coremod.objects.items.ItemRadianCoin;
 import timberwolfgalaxy.coremod.objects.items.ItemSilverCoin;
 import timberwolfgalaxy.coremod.objects.items.Wand;
+import timberwolfgalaxy.coremod.objects.items.spelltomes.SpellTome;
 import timberwolfgalaxy.coremod.objects.tools.ToolAriliumAxe;
 import timberwolfgalaxy.coremod.objects.tools.ToolAriliumHoe;
 import timberwolfgalaxy.coremod.objects.tools.ToolAriliumPickaxe;
@@ -66,4 +67,9 @@ public class ItemInit {
 	public static final Item WAND_TROLL = new Wand("wand_troll");
 	public static final Item WAND_UNICORN = new Wand("wand_unicorn");
 	public static final Item WAND_VEELA = new Wand("wand_veela");
+	
+	//Tomes
+	public static final Item TOME_FIREBALL = new SpellTome("tome_fireball", 0);
+	public static final Item TOME_POISON_BLAST = new SpellTome("tome_poison_blast", 1);
+	public static final Item TOME_HEAL = new SpellTome("tome_heal", 2);
 }

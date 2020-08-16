@@ -1,5 +1,6 @@
 package timberwolfgalaxy.coremod.capabilty;
 
+import net.minecraft.entity.player.EntityPlayer;
 import timberwolfgalaxy.coremod.objects.items.Wand;
 
 public class SelectedSpell implements ISelectedSpell{
@@ -8,7 +9,7 @@ public class SelectedSpell implements ISelectedSpell{
 	@Override
 	public void setSpell(int spell) {
 		selectedSpell = spell;
-		if(selectedSpell < 0 || selectedSpell > Wand.SPELLS.size()-1) selectedSpell = 0;
+		if(selectedSpell < 0) selectedSpell = 0;
 	}
 
 	@Override
@@ -17,8 +18,11 @@ public class SelectedSpell implements ISelectedSpell{
 	}
 
 	@Override
-	public void nextSpell() {
-		selectedSpell++;
-		if(selectedSpell < 0 || selectedSpell > Wand.SPELLS.size()-1) selectedSpell = 0;
+	public void nextSpell(int max) {
+		if(selectedSpell < 0 || selectedSpell >= max) {
+			selectedSpell = 0;
+		}else {
+			selectedSpell++;
+		}
 	}
 }

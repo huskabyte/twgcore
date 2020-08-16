@@ -2,7 +2,7 @@ package timberwolfgalaxy.coremod.capabilty;
 
 public class Level implements ILevel{
 	
-	private int level;
+	private int level = 0;
 	
 	@Override
 	public void setLevel(int level) {

@@ -1,0 +1,30 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "all": "blocks/stone"
+    },
+    "model": "cube_all",
+    "uvlock": true
+  },
+  "variants": {
+    "ore": {
+        "0": {"model":"minecraft:stone"},
+        "1": {"model":"minecraft:stone"},
+        "2": {"model":"minecraft:stone"},
+        "3": {"model":"minecraft:stone"},
+        "4": {"model":"minecraft:stone"},
+        "5": {"model":"minecraft:stone"},
+        "6": {"model":"minecraft:stone"},
+        "7": {"model":"minecraft:stone"},
+        "8": {"model":"minecraft:stone"},
+        "9": {"model":"minecraft:stone"},
+        "10": {"model":"minecraft:stone"},
+        "11": {"model":"minecraft:stone"},
+        "12": {"model":"minecraft:stone"},
+        "13": {"model":"minecraft:stone"},
+        "14": {"model":"minecraft:stone"},
+        "15": {"model":"minecraft:stone"}
+    }
+  }
+}

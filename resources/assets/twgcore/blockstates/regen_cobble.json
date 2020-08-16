@@ -1,0 +1,30 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "all": "blocks/cobblestone"
+    },
+    "model": "cube_all",
+    "uvlock": true
+  },
+  "variants": {
+    "ore": {
+        "0": {"model":"minecraft:cobblestone"},
+        "1": {"model":"minecraft:cobblestone"},
+        "2": {"model":"minecraft:cobblestone"},
+        "3": {"model":"minecraft:cobblestone"},
+        "4": {"model":"minecraft:cobblestone"},
+        "5": {"model":"minecraft:cobblestone"},
+        "6": {"model":"minecraft:cobblestone"},
+        "7": {"model":"minecraft:cobblestone"},
+        "8": {"model":"minecraft:cobblestone"},
+        "9": {"model":"minecraft:cobblestone"},
+        "10": {"model":"minecraft:cobblestone"},
+        "11": {"model":"minecraft:cobblestone"},
+        "12": {"model":"minecraft:cobblestone"},
+        "13": {"model":"minecraft:cobblestone"},
+        "14": {"model":"minecraft:cobblestone"},
+        "15": {"model":"minecraft:cobblestone"}
+    }
+  }
+}

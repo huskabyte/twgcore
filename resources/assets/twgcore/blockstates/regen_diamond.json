@@ -1,0 +1,30 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "all": "blocks/diamond_ore"
+    },
+    "model": "cube_all",
+    "uvlock": true
+  },
+  "variants": {
+    "ore": {
+        "0": {"model":"minecraft:diamond_ore"},
+        "1": {"model":"minecraft:diamond_ore"},
+        "2": {"model":"minecraft:diamond_ore"},
+        "3": {"model":"minecraft:diamond_ore"},
+        "4": {"model":"minecraft:diamond_ore"},
+        "5": {"model":"minecraft:diamond_ore"},
+        "6": {"model":"minecraft:diamond_ore"},
+        "7": {"model":"minecraft:diamond_ore"},
+        "8": {"model":"minecraft:diamond_ore"},
+        "9": {"model":"minecraft:diamond_ore"},
+        "10": {"model":"minecraft:diamond_ore"},
+        "11": {"model":"minecraft:diamond_ore"},
+        "12": {"model":"minecraft:diamond_ore"},
+        "13": {"model":"minecraft:diamond_ore"},
+        "14": {"model":"minecraft:diamond_ore"},
+        "15": {"model":"minecraft:diamond_ore"}
+    }
+  }
+}

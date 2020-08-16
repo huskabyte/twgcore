@@ -1,0 +1,30 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "all": "blocks/bedrock"
+    },
+    "model": "cube_all",
+    "uvlock": true
+  },
+  "variants": {
+    "ore": {
+        "0": {"model":"minecraft:bedrock"},
+        "1": {"model":"minecraft:bedrock"},
+        "2": {"model":"minecraft:bedrock"},
+        "3": {"model":"minecraft:bedrock"},
+        "4": {"model":"minecraft:bedrock"},
+        "5": {"model":"minecraft:bedrock"},
+        "6": {"model":"minecraft:bedrock"},
+        "7": {"model":"minecraft:bedrock"},
+        "8": {"model":"minecraft:bedrock"},
+        "9": {"model":"minecraft:bedrock"},
+        "10": {"model":"minecraft:bedrock"},
+        "11": {"model":"minecraft:bedrock"},
+        "12": {"model":"minecraft:bedrock"},
+        "13": {"model":"minecraft:bedrock"},
+        "14": {"model":"minecraft:bedrock"},
+        "15": {"model":"minecraft:bedrock"}
+    }
+  }
+}

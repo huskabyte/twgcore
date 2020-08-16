@@ -1,14 +1,16 @@
 package timberwolfgalaxy.coremod.objects.items.spells;
 
+import java.awt.Color;
+
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.projectile.EntityLargeFireball;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import timberwolfgalaxy.coremod.entity.EntitySpellFireball;
 
 public class SpellFireball extends Spell {
 
 	public SpellFireball() {
-		this.color = "&C";
+		this.color = TextFormatting.RED;
 		this.name = "Fireball";
 	}
 
@@ -29,6 +31,11 @@ public class SpellFireball extends Spell {
 	@Override
 	public int slot() {
 		return 3;
+	}
+
+	@Override
+	public Color getColor() {
+		return new Color(255, 85, 85);
 	}
 
 }
