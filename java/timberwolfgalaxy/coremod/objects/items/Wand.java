@@ -13,7 +13,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import timberwolfgalaxy.coremod.Main;
-import timberwolfgalaxy.coremod.capabilty.KnownSpellsProvider;
 import timberwolfgalaxy.coremod.capabilty.LevelProvider;
 import timberwolfgalaxy.coremod.capabilty.SelectedSpellProvider;
 import timberwolfgalaxy.coremod.capabilty.SpellSlotsProvider;
@@ -24,12 +23,8 @@ import timberwolfgalaxy.coremod.objects.items.spells.SpellFireball;
 import timberwolfgalaxy.coremod.objects.items.spells.SpellHealingWord;
 import timberwolfgalaxy.coremod.objects.items.spells.SpellPoisonBlast;
 import timberwolfgalaxy.coremod.util.IHasModel;
-import timberwolfgalaxy.coremod.util.handlers.KnownSpellsPacketHandler;
 import timberwolfgalaxy.coremod.util.handlers.LevelPacketHandler;
-import timberwolfgalaxy.coremod.util.handlers.SpellPacketHandler;
-import timberwolfgalaxy.coremod.util.packets.PacketKnownSpells;
 import timberwolfgalaxy.coremod.util.packets.PacketLevel;
-import timberwolfgalaxy.coremod.util.packets.PacketSpell;
 
 public class Wand extends Item implements IHasModel {
 
@@ -50,50 +45,23 @@ public class Wand extends Item implements IHasModel {
 
 		if (!playerIn.world.isRemote) {
 			playerIn.sendMessage(new TextComponentString(Wand.SPELLS
-					.get(playerIn.getCapability(KnownSpellsProvider.KNOWN_SPELLS, null).getKnownSpells()[playerIn
-							.getCapability(SelectedSpellProvider.SELECTED_SPELL, null).getSpell()])
-					.getName()));
+					.get(playerIn.getCapability(SelectedSpellProvider.SELECTED_SPELL, null).getSpell()).getName()));
 			LevelPacketHandler.INSTANCE.sendTo(
 					new PacketLevel(playerIn.getCapability(LevelProvider.LEVEL, null).getLevel()),
 					(EntityPlayerMP) playerIn);
-			KnownSpellsPacketHandler.INSTANCE.sendTo(
-					new PacketKnownSpells(
-							playerIn.getCapability(KnownSpellsProvider.KNOWN_SPELLS, null).getKnownSpells()),
-					(EntityPlayerMP) playerIn);
-			SpellPacketHandler.INSTANCE.sendTo(
-					new PacketSpell(playerIn.getCapability(SelectedSpellProvider.SELECTED_SPELL, null).getSpell()),
-					(EntityPlayerMP) playerIn);
 
 		}
-		
-		playerIn.getCapability(SelectedSpellProvider.SELECTED_SPELL, null)
-		.nextSpell(playerIn.getCapability(KnownSpellsProvider.KNOWN_SPELLS, null).getKnownSpells().length - 1);
+
+		playerIn.getCapability(SelectedSpellProvider.SELECTED_SPELL, null).nextSpell(SPELLS.size());
 
 		return super.onItemRightClick(worldIn, playerIn, handIn);
 	}
 
 	@Override
 	public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack) {
-		if (entityLiving instanceof EntityPlayer) {
-			EntityPlayer playerIn = (EntityPlayer) entityLiving;
-			if (!playerIn.world.isRemote) {
-				LevelPacketHandler.INSTANCE.sendTo(
-						new PacketLevel(playerIn.getCapability(LevelProvider.LEVEL, null).getLevel()),
-						(EntityPlayerMP) playerIn);
-				SpellPacketHandler.INSTANCE.sendTo(
-						new PacketSpell(playerIn.getCapability(SelectedSpellProvider.SELECTED_SPELL, null).getSpell()),
-						(EntityPlayerMP) playerIn);
-				KnownSpellsPacketHandler.INSTANCE.sendTo(
-						new PacketKnownSpells(
-								playerIn.getCapability(KnownSpellsProvider.KNOWN_SPELLS, null).getKnownSpells()),
-						(EntityPlayerMP) playerIn);
-			}
-			cast(SPELLS.get(playerIn.getCapability(KnownSpellsProvider.KNOWN_SPELLS, null).getKnownSpells()[entityLiving
-					.getCapability(SelectedSpellProvider.SELECTED_SPELL, null).getSpell()]),
+			cast(SPELLS.get(((EntityPlayer) entityLiving).getCapability(SelectedSpellProvider.SELECTED_SPELL, null).getSpell()),
 					(EntityPlayer) entityLiving);
 			return false;
-		}
-		return super.onEntitySwing(entityLiving, stack);
 	}
 
 	@Override
