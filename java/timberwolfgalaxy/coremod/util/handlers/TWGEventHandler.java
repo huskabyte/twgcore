@@ -21,12 +21,16 @@ import net.minecraftforge.event.entity.player.PlayerWakeUpEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerChangedDimensionEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent;
 import net.minecraftforge.server.permission.PermissionAPI;
+import timberwolfgalaxy.coremod.capabilty.IKnownSpells;
 import timberwolfgalaxy.coremod.capabilty.ILevel;
 import timberwolfgalaxy.coremod.capabilty.ISelectedSpell;
 import timberwolfgalaxy.coremod.capabilty.ISpellSlots;
+import timberwolfgalaxy.coremod.capabilty.KnownSpellsProvider;
 import timberwolfgalaxy.coremod.capabilty.LevelProvider;
 import timberwolfgalaxy.coremod.capabilty.SelectedSpellProvider;
 import timberwolfgalaxy.coremod.capabilty.SpellSlotsProvider;
@@ -35,6 +39,7 @@ import timberwolfgalaxy.coremod.init.EntityInit;
 import timberwolfgalaxy.coremod.objects.blocks.regen.RegenerativeBlock;
 import timberwolfgalaxy.coremod.objects.items.Wand;
 import timberwolfgalaxy.coremod.util.Reference;
+import timberwolfgalaxy.coremod.util.packets.PacketKnownSpells;
 import timberwolfgalaxy.coremod.util.packets.PacketLevel;
 
 @EventBusSubscriber
@@ -48,9 +53,11 @@ public class TWGEventHandler {
 	public static void attachCapability(AttachCapabilitiesEvent<Entity> event) {
 		if (!(event.getObject() instanceof EntityPlayer))
 			return;
+
 		event.addCapability(SELECTED_SPELL, new SelectedSpellProvider());
 		event.addCapability(SPELL_SLOT, new SpellSlotsProvider());
 		event.addCapability(LEVEL, new LevelProvider());
+		event.addCapability(KNOWN_SPELLS, new KnownSpellsProvider());
 	}
 
 	@SubscribeEvent
@@ -58,19 +65,23 @@ public class TWGEventHandler {
 		Minecraft mc = Minecraft.getMinecraft();
 		int[] spellSlots = mc.player.getCapability(SpellSlotsProvider.SPELL_SLOTS, null).getSlots();
 		if (mc.player.getHeldItemMainhand().getItem() instanceof Wand && Wand.SPELLS
-				.get(mc.player.getCapability(SelectedSpellProvider.SELECTED_SPELL, null).getSpell())
+				.get(mc.player.getCapability(KnownSpellsProvider.KNOWN_SPELLS, null).getKnownSpells()[mc.player
+						.getCapability(SelectedSpellProvider.SELECTED_SPELL, null).getSpell()])
 				.slot() > 0) {
 			mc.fontRenderer.drawStringWithShadow(
 					Integer.toString(Wand.SPELLS.get(
-							mc.player.getCapability(SelectedSpellProvider.SELECTED_SPELL, null).getSpell())
+							mc.player.getCapability(KnownSpellsProvider.KNOWN_SPELLS, null).getKnownSpells()[mc.player
+									.getCapability(SelectedSpellProvider.SELECTED_SPELL, null).getSpell()])
 							.slot()),
 					0, 0, Color.WHITE.getRGB());
 			for (int i = 0; i < mc.player.getCapability(SpellSlotsProvider.SPELL_SLOTS, null)
 					.getMaxSlots(mc.player.getCapability(LevelProvider.LEVEL, null).getLevel())[Wand.SPELLS.get(
-							mc.player.getCapability(SelectedSpellProvider.SELECTED_SPELL, null).getSpell())
+							mc.player.getCapability(KnownSpellsProvider.KNOWN_SPELLS, null).getKnownSpells()[mc.player
+									.getCapability(SelectedSpellProvider.SELECTED_SPELL, null).getSpell()])
 							.slot() - 1]; i++) {
 				if (spellSlots[Wand.SPELLS
-						.get(mc.player.getCapability(SelectedSpellProvider.SELECTED_SPELL, null).getSpell())
+						.get(mc.player.getCapability(KnownSpellsProvider.KNOWN_SPELLS, null).getKnownSpells()[mc.player
+								.getCapability(SelectedSpellProvider.SELECTED_SPELL, null).getSpell()])
 						.slot() - 1] > i) {
 					mc.fontRenderer.drawStringWithShadow("\u25cf", 10 + 5 * (i), 0, Color.WHITE.getRGB());
 				} else {
@@ -80,10 +91,14 @@ public class TWGEventHandler {
 			mc.fontRenderer
 					.drawStringWithShadow(
 							Wand.SPELLS
-									.get(mc.player.getCapability(SelectedSpellProvider.SELECTED_SPELL, null).getSpell())
+									.get(mc.player.getCapability(KnownSpellsProvider.KNOWN_SPELLS, null)
+											.getKnownSpells()[mc.player.getCapability(
+													SelectedSpellProvider.SELECTED_SPELL, null).getSpell()])
 									.getName(),
 							0, 10,
-							Wand.SPELLS.get(mc.player.getCapability(SelectedSpellProvider.SELECTED_SPELL, null).getSpell())
+							Wand.SPELLS.get(mc.player.getCapability(KnownSpellsProvider.KNOWN_SPELLS, null)
+									.getKnownSpells()[mc.player
+											.getCapability(SelectedSpellProvider.SELECTED_SPELL, null).getSpell()])
 									.getColor().getRGB());
 			mc.fontRenderer.drawStringWithShadow(
 					"Level: " + mc.player.getCapability(LevelProvider.LEVEL, null).getLevel(), 0, 20,
@@ -93,12 +108,16 @@ public class TWGEventHandler {
 			mc.fontRenderer
 					.drawStringWithShadow(
 							Wand.SPELLS
-									.get(mc.player.getCapability(SelectedSpellProvider.SELECTED_SPELL, null).getSpell())
+									.get(mc.player.getCapability(KnownSpellsProvider.KNOWN_SPELLS, null)
+											.getKnownSpells()[mc.player.getCapability(
+													SelectedSpellProvider.SELECTED_SPELL, null).getSpell()])
 									.getName(),
 							0, 10,
-							Wand.SPELLS.get(mc.player.getCapability(SelectedSpellProvider.SELECTED_SPELL, null).getSpell())
+							Wand.SPELLS.get(mc.player.getCapability(KnownSpellsProvider.KNOWN_SPELLS, null)
+									.getKnownSpells()[mc.player
+											.getCapability(SelectedSpellProvider.SELECTED_SPELL, null).getSpell()])
 									.getColor().getRGB());
-		} 
+		}
 	}
 
 	@SubscribeEvent
@@ -111,11 +130,17 @@ public class TWGEventHandler {
 			LevelPacketHandler.INSTANCE.sendTo(
 					new PacketLevel(player.getCapability(LevelProvider.LEVEL, null).getLevel()),
 					(EntityPlayerMP) player);
+
+			KnownSpellsPacketHandler.INSTANCE.sendTo(
+					new PacketKnownSpells(
+							player.getCapability(KnownSpellsProvider.KNOWN_SPELLS, null).getKnownSpells()),
+					(EntityPlayerMP) player);
 		}
 
 		event.player.getCapability(SelectedSpellProvider.SELECTED_SPELL, null).setSpell(0);
 		player.sendMessage(new TextComponentString(
-				"Selected Spell:" + Wand.SPELLS.get(selectedSpell.getSpell()).getName()));
+				"Selected Spell:" + Wand.SPELLS.get(event.player.getCapability(KnownSpellsProvider.KNOWN_SPELLS, null)
+						.getKnownSpells()[selectedSpell.getSpell()]).getName()));
 
 		event.player.getCapability(SpellSlotsProvider.SPELL_SLOTS, null)
 				.fillSlots(event.player.getCapability(LevelProvider.LEVEL, null).getLevel());
@@ -193,14 +218,23 @@ public class TWGEventHandler {
 	@SubscribeEvent
 	public static void onPlayerClone(PlayerEvent.Clone event) {
 		EntityPlayer player = event.getEntityPlayer();
-		if (!player.world.isRemote) {
 		ILevel level = player.getCapability(LevelProvider.LEVEL, null);
 		ILevel oldLevel = event.getOriginal().getCapability(LevelProvider.LEVEL, null);
+
+		IKnownSpells spells = player.getCapability(KnownSpellsProvider.KNOWN_SPELLS, null);
+		IKnownSpells oldSpells = event.getOriginal().getCapability(KnownSpellsProvider.KNOWN_SPELLS, null);
 		
 		player.getCapability(LevelProvider.LEVEL, null).setLevel(oldLevel.getLevel());
+		player.getCapability(KnownSpellsProvider.KNOWN_SPELLS, null).setKnownSpells(oldSpells.getKnownSpells());
 
+		if (!player.world.isRemote) {
 			LevelPacketHandler.INSTANCE.sendTo(
 					new PacketLevel(player.getCapability(LevelProvider.LEVEL, null).getLevel()),
+					(EntityPlayerMP) player);
+
+			KnownSpellsPacketHandler.INSTANCE.sendTo(
+					new PacketKnownSpells(
+							player.getCapability(KnownSpellsProvider.KNOWN_SPELLS, null).getKnownSpells()),
 					(EntityPlayerMP) player);
 		}
 	}

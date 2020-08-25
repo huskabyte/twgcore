@@ -19,7 +19,7 @@ public class SelectedSpell implements ISelectedSpell{
 
 	@Override
 	public void nextSpell(int max) {
-		if(selectedSpell < 0 || selectedSpell >= max-1) {
+		if(selectedSpell < 0 || selectedSpell >= max) {
 			selectedSpell = 0;
 		}else {
 			selectedSpell++;

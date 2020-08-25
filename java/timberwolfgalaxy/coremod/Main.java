@@ -17,9 +17,12 @@ import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.server.permission.DefaultPermissionLevel;
 import net.minecraftforge.server.permission.PermissionAPI;
+import timberwolfgalaxy.coremod.capabilty.IKnownSpells;
 import timberwolfgalaxy.coremod.capabilty.ILevel;
 import timberwolfgalaxy.coremod.capabilty.ISelectedSpell;
 import timberwolfgalaxy.coremod.capabilty.ISpellSlots;
+import timberwolfgalaxy.coremod.capabilty.KnownSpells;
+import timberwolfgalaxy.coremod.capabilty.KnownSpellsStorage;
 import timberwolfgalaxy.coremod.capabilty.Level;
 import timberwolfgalaxy.coremod.capabilty.LevelStorage;
 import timberwolfgalaxy.coremod.capabilty.SelectedSpell;
@@ -36,6 +39,7 @@ import timberwolfgalaxy.coremod.tabs.TWGTools;
 import timberwolfgalaxy.coremod.tabs.TWGWands;
 import timberwolfgalaxy.coremod.util.Reference;
 import timberwolfgalaxy.coremod.util.handlers.BondablePacketHandler;
+import timberwolfgalaxy.coremod.util.handlers.KnownSpellsPacketHandler;
 import timberwolfgalaxy.coremod.util.handlers.LevelPacketHandler;
 import timberwolfgalaxy.coremod.util.handlers.QueryPacketHandler;
 import timberwolfgalaxy.coremod.util.handlers.RegistryHandler;
@@ -44,6 +48,7 @@ import timberwolfgalaxy.coremod.util.handlers.SwitchPacketHandler;
 import timberwolfgalaxy.coremod.util.handlers.TWGEventHandler;
 import timberwolfgalaxy.coremod.util.packets.PacketBondableSwitch;
 import timberwolfgalaxy.coremod.util.packets.PacketBondableTricks;
+import timberwolfgalaxy.coremod.util.packets.PacketKnownSpells;
 import timberwolfgalaxy.coremod.util.packets.PacketLevel;
 import timberwolfgalaxy.coremod.util.packets.PacketQuery;
 import timberwolfgalaxy.coremod.util.packets.PacketSpell;
@@ -81,6 +86,7 @@ public class Main {
 		CapabilityManager.INSTANCE.register(ISelectedSpell.class, new SelectedSpellStorage(), SelectedSpell.class);
 		CapabilityManager.INSTANCE.register(ISpellSlots.class, new SpellSlotsStorage(), SpellSlots.class);
 		CapabilityManager.INSTANCE.register(ILevel.class, new LevelStorage(), Level.class);
+		CapabilityManager.INSTANCE.register(IKnownSpells.class, new KnownSpellsStorage(), KnownSpells.class);
 		
 		PermissionAPI.registerNode("twgcore.developer", DefaultPermissionLevel.NONE, "Developer - Testers and developers. CAN BREAK THINGS.");
 		
@@ -122,6 +128,7 @@ public class Main {
 		SwitchPacketHandler.INSTANCE.registerMessage(SwitchPacketHandler.class, PacketBondableSwitch.class, 1, Side.SERVER);
 		LevelPacketHandler.INSTANCE.registerMessage(LevelPacketHandler.class, PacketLevel.class, 2, Side.CLIENT);
 		SpellPacketHandler.INSTANCE.registerMessage(SpellPacketHandler.class, PacketSpell.class, 3, Side.CLIENT);
+		KnownSpellsPacketHandler.INSTANCE.registerMessage(KnownSpellsPacketHandler.class, PacketKnownSpells.class, 5, Side.CLIENT);
 		QueryPacketHandler.INSTANCE.registerMessage(QueryPacketHandler.class, PacketQuery.class, 4, Side.SERVER);
 		
 		RegistryHandler.InitRegistries();
