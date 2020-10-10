@@ -42,7 +42,6 @@ public class TWGEventHandler {
 	public static final ResourceLocation SELECTED_SPELL = new ResourceLocation(Reference.MODID, "selectedspell");
 	public static final ResourceLocation SPELL_SLOT = new ResourceLocation(Reference.MODID, "spellslot");
 	public static final ResourceLocation LEVEL = new ResourceLocation(Reference.MODID, "level");
-	public static final ResourceLocation KNOWN_SPELLS = new ResourceLocation(Reference.MODID, "knownSpells");
 
 	@SubscribeEvent
 	public static void attachCapability(AttachCapabilitiesEvent<Entity> event) {
