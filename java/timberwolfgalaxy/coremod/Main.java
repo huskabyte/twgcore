@@ -2,6 +2,7 @@ package timberwolfgalaxy.coremod;
 
 import java.io.File;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
@@ -128,7 +129,6 @@ public class Main {
 	}
 	@EventHandler
 	public static void postInit(FMLPostInitializationEvent event) {
-		
 	}
 	
 	@EventHandler

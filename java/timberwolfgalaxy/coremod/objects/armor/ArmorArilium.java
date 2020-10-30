@@ -31,5 +31,9 @@ public class ArmorArilium extends ItemArmor implements IHasModel{
 			ModelBiped _default) {
 		return super.getArmorModel(entityLiving, itemStack, armorSlot, _default);
 	}
-
+	
+	@Override
+	public boolean isEnchantable(ItemStack stack) {
+		return true;
+	}
 }

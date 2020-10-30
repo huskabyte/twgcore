@@ -8,6 +8,7 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.EnumHelper;
 import timberwolfgalaxy.coremod.objects.armor.ArmorArilium;
 import timberwolfgalaxy.coremod.objects.items.ItemAriliumIngot;
@@ -29,7 +30,7 @@ public class ItemInit {
 	
 	//Materials
 	public static final ToolMaterial TOOL_ARILIUM = EnumHelper.addToolMaterial("tool_arilium", 4, 2048, 9.0F, 4.0F, 10);
-	public static final ArmorMaterial ARMOR_ARILIUM = EnumHelper.addArmorMaterial("armor_arilium", Reference.MODID + ":arilium", -1, new int[]{5, 7, 9, 4}, 10, SoundEvents.BLOCK_NOTE_HARP, 2.5F);	
+	public static final ArmorMaterial ARMOR_ARILIUM = EnumHelper.addArmorMaterial("armor_arilium", Reference.MODID + ":arilium", -1, new int[]{5, 6, 9, 3}, 10, SoundEvents.BLOCK_NOTE_HARP, 2F);	
 	
 	//Ores
 	public static final Item INGOT_ARILIUM = new ItemAriliumIngot("ingot_arilium");

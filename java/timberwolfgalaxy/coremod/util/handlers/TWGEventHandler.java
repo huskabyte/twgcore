@@ -8,6 +8,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.ResourceLocation;
@@ -164,27 +165,23 @@ public class TWGEventHandler {
 
 	@SubscribeEvent
 	public static void onPlayerRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
-		if (event.getWorld().getBlockState(event.getPos()).getBlock() instanceof BlockBed) {
-			if (event.getEntityPlayer().world.isRemote)
+		if (event.getWorld().getBlockState(event.getPos()).getBlock() instanceof BlockBed && !event.getEntityPlayer().isSneaking()) {
+			if (event.getEntityPlayer().world.isRemote) {
 				event.getEntityPlayer().sendMessage(new TextComponentString("Spell Slots Refreshed!"));
+			}
 			event.getEntityPlayer().getCapability(SpellSlotsProvider.SPELL_SLOTS, null)
 					.fillSlots(event.getEntityPlayer().getCapability(LevelProvider.LEVEL, null).getLevel());
+		}else {
+			if (!PermissionAPI.hasPermission(event.getEntityPlayer(), "twgcore.insurvival") && event.getEntityPlayer().getHeldItemMainhand().getItem() instanceof ItemBlock && !event.getEntityPlayer().capabilities.isCreativeMode) {
+				event.setCanceled(true);
+			}
 		}
-	}
-
-	@SubscribeEvent
-	public static void onPlayerWakeUp(PlayerWakeUpEvent event) {
-		if (!event.getEntityPlayer().world.isRemote)
-			event.getEntityPlayer().sendMessage(new TextComponentString("Spell Slots Refreshed!"));
-		event.getEntityPlayer().getCapability(SpellSlotsProvider.SPELL_SLOTS, null)
-				.fillSlots(event.getEntityPlayer().getCapability(LevelProvider.LEVEL, null).getLevel());
 	}
 
 	public static void onPlayerDrop(PlayerDropsEvent event) {
 		for (EntityItem i : event.getDrops()) {
 			if (i.getItem().getItem() instanceof Wand) {
 				event.getDrops().remove(event.getDrops().indexOf(i));
-
 			}
 		}
 	}

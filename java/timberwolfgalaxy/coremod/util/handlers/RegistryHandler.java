@@ -8,6 +8,7 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import timberwolfgalaxy.coremod.commands.CommandLevelUp;
 import timberwolfgalaxy.coremod.commands.CommandPassiveBondable;
@@ -53,6 +54,7 @@ public class RegistryHandler {
 		OreDictionary.registerOre("oreSilver", new ItemStack(BlockInit.ORE_SILVER));
 		OreDictionary.registerOre("oreRadian", new ItemStack(BlockInit.ORE_RADIAN));
 		OreDictionary.registerOre("oreArilium", new ItemStack(BlockInit.ORE_ARILIUM));
+		GameRegistry.addSmelting(BlockInit.ORE_ARILIUM, new ItemStack(ItemInit.INGOT_ARILIUM, 1), 1.5f);
 	}
 	
 	public static void serverRegistries(FMLServerStartingEvent event) {
