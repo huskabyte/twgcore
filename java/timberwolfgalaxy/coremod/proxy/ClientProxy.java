@@ -50,4 +50,21 @@ public class ClientProxy extends CommonProxy{
 			GlStateManager.pushMatrix();
 		}
 	}
+	
+	@Override
+	public void onWolfRender(ItemStack stack, EntityPlayer player, RenderType renderType, float fl) {
+		if(renderType==RenderType.BODY) {
+			GlStateManager.popMatrix();
+			GlStateManager.translate(0.0, -1.25, -0.52);
+			GlStateManager.scale(0.45, 0.45, 0.45);
+			GlStateManager.rotate(180F, 0F, 0F, 1F);
+			GlStateManager.translate(0F, -3.2F, 0.75F);
+			if(player.isSneaking()){
+				GlStateManager.translate(0F, -0.75F, 0F);
+				GlStateManager.rotate(-90F / (float) Math.PI, 1.0F, 0.0F, 0.0F);
+			}
+			Minecraft.getMinecraft().getItemRenderer().renderItem(player, stack, TransformType.HEAD);
+			GlStateManager.pushMatrix();
+		}
+	}
 }

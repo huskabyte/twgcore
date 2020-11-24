@@ -21,4 +21,6 @@ public class CommonProxy {
 	}
 	public void onDragonbornRender(ItemStack stack, EntityPlayer player, RenderType renderType, float fl) {
 	}
+	public void onWolfRender(ItemStack stack, EntityPlayer player, RenderType renderType, float fl) {
+	}
 }

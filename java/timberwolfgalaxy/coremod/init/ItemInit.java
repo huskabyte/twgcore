@@ -8,7 +8,6 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.EnumHelper;
 import timberwolfgalaxy.coremod.objects.armor.ArmorArilium;
 import timberwolfgalaxy.coremod.objects.items.ItemAriliumIngot;
@@ -17,6 +16,7 @@ import timberwolfgalaxy.coremod.objects.items.ItemDragonbornAmulet;
 import timberwolfgalaxy.coremod.objects.items.ItemRadianCoin;
 import timberwolfgalaxy.coremod.objects.items.ItemSilverCoin;
 import timberwolfgalaxy.coremod.objects.items.Wand;
+import timberwolfgalaxy.coremod.objects.items.baubles.amulets.ItemWolfAmulet;
 import timberwolfgalaxy.coremod.objects.items.spelltomes.SpellTome;
 import timberwolfgalaxy.coremod.objects.tools.ToolAriliumAxe;
 import timberwolfgalaxy.coremod.objects.tools.ToolAriliumHoe;
@@ -55,6 +55,7 @@ public class ItemInit {
 	
 	//Amulets
 	public static final Item AMULET_DRAGONBORN = new ItemDragonbornAmulet("dragonborn_amulet");
+	public static final Item AMULET_WOLF = new ItemWolfAmulet("amulet_wolf");
 	
 	//Wands
 	public static final Item WAND_BLAND = new Wand("wand_bland");

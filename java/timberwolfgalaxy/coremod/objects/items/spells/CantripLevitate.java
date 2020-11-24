@@ -2,6 +2,9 @@ package timberwolfgalaxy.coremod.objects.items.spells;
 
 import java.awt.Color;
 
+import com.universeguard.UniverseGuard;
+import com.universeguard.utils.RegionUtils;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.PotionTypes;
@@ -26,7 +29,7 @@ public class CantripLevitate extends Spell{
 
 	@Override
 	public void cast(EntityPlayer player, World world) {
-		player.addPotionEffect(new PotionEffect(MobEffects.LEVITATION, 100));
+			player.addPotionEffect(new PotionEffect(MobEffects.LEVITATION, 100));
 	}
 
 	@Override
